@@ -41,8 +41,8 @@ class CategoryController extends Controller
         // $category->save();
 
         // cach 2
-        Category::create($request->all());
-        return response('', Response::HTTP_CREATED);
+        $category = Category::create($request->all());
+        return response($category, Response::HTTP_CREATED);
     }
 
     /**
@@ -53,9 +53,11 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return $category;
+        if($category->id == null)
+            return Response('', Response::HTTP_NOT_FOUND);
+        dd($category);
+        //return $category;
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -66,7 +68,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        dd($request, $category);
     }
 
     /**

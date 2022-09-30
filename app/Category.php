@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
@@ -17,10 +18,19 @@ class Category extends Model
         // });
     }
 
-
     // Overide lại nếu cần sử dụng Binding Route Model
     public function getRouteKeyName()
     {
         return parent::getRouteKeyName();
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->diffForHumans();
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->diffForHumans();
     }
 }
