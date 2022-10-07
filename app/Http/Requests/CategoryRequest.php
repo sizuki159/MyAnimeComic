@@ -25,17 +25,16 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:\App\Category,name',
+            'name' => 'required|unique:\App\Model\Category,name',
             'status' => ['required', Rule::in(['active', 'disabled'])],
         ];
     }
 
-    public function messages()
-    {
-        return parent::messages();
-        // return [
-        //     'name.required' => 'ngu ngoc vl',
-        //     'status.required' => 'abc'
-        // ];
-    }
+    // public function messages()
+    // {
+    //     return [
+    //         'name.required' => 'ngu ngoc vl',
+    //         'status.required' => 'abc'
+    //     ];
+    // }
 }

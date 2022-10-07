@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
+Route::prefix('/categories')->group(function(){
+    Route::get('/', 'CategoryController@index')->name('categories.index');
+    Route::post('/', 'CategoryController@store')->name('categories.store');
+});
+
