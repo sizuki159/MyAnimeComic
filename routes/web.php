@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use PhpParser\Node\Expr\FuncCall;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function(){
+    return view('admin.pages.dashboard');
+});
 
 Route::prefix('/categories')->group(function(){
     Route::get('/', 'CategoryController@index')->name('categories.index');
