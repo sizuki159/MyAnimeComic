@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
-    private $_view = "admin";
+    private $_view = "admin.pages.categories.";
 
     public function index()
     {
         $categories = Category::all();
-        return view($this->_view . '/index', [
+        return view($this->_view . 'index', [
             'categories' => $categories
         ]);
     }

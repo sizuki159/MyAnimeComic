@@ -14,12 +14,16 @@ use PhpParser\Node\Expr\FuncCall;
 |
 */
 
-Route::get('/', function(){
-    return view('admin.pages.dashboard');
+
+Route::prefix('adminv2')->group(function() {
+
+    Route::get('dashboard', 'DashboardController@index')->name('admin.dashboard');
+
+    Route::prefix('/categories')->group(function(){
+        Route::get('/', 'CategoryController@index')->name('admin.categories.index');
+        Route::post('/', 'CategoryController@store')->name('admin.categories.store');
+    });
 });
 
-Route::prefix('/categories')->group(function(){
-    Route::get('/', 'CategoryController@index')->name('categories.index');
-    Route::post('/', 'CategoryController@store')->name('categories.store');
-});
+
 
