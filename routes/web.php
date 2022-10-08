@@ -27,8 +27,15 @@ Route::prefix('adminv2')->group(function() {
 
     Route::prefix('/category')->group(function(){
         Route::get('/', 'CategoryController@index')->name('admin.category.index');
-        Route::get('/form', 'CategoryController@form')->name('admin.category.form');
-        Route::get('/{id}', 'CategoryController@detail')->name('admin.category.detail');
-        Route::post('/', 'CategoryController@store')->name('admin.category.store');
+
+        Route::get('/add', 'CategoryController@add')->name('admin.category.add');
+        Route::post('/store', 'CategoryController@store')->name('admin.category.store');
+
+        Route::get('/edit/{id}', 'CategoryController@edit')->where('id', '[0-9]+')->name('admin.category.edit');
+        Route::post('/update', 'CategoryController@update')->name('admin.category.update');
+
+        Route::get('/delete/{id}', 'CategoryController@destroy')->where('id', '[0-9]+')->name('admin.category.delete');
+        Route::get('/change-status-active/{id}', 'CategoryController@changeStatusActive')->where('id', '[0-9]+')->name('admin.category.active');
+        Route::get('/change-status-disable/{id}', 'CategoryController@changeStatusDisable')->where('id', '[0-9]+')->name('admin.category.disable');
     });
 });

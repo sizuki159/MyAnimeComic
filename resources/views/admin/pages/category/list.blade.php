@@ -1,6 +1,10 @@
 @extends('admin.main')
 
 @section('append_css')
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{asset('admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
 @endsection
 
 @section('content')
@@ -13,10 +17,7 @@
                         <h1 class="m-0">Category List</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Category</li>
-                        </ol>
+                        <a href="{{route('admin.category.add')}}" class="float-sm-right btn btn-success"><i class="fa fa-plus-circle"></i> Thêm mới</a>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -50,10 +51,24 @@
                                             <tr>
                                                 <td>{{ $category->id }}</td>
                                                 <td>{{ $category->name }}</td>
-                                                <td><a href="/change-status-active/1" type="button" class="btn btn-round btn-success">Active</a></td>
+                                                <td>
+                                                    @if ($category->status == "active")
+                                                    <a href="{{route('admin.category.disable', ['id' => $category->id])}}" type="button"
+                                                    class="btn btn-round btn-success">Active</a> 
+                                                    @else
+                                                    <a href="{{route('admin.category.active', ['id' => $category->id])}}" type="button"
+                                                    class="btn btn-round btn-danger">Disabled</a> 
+                                                    @endif
+                                                </td>
                                                 <td>{{ $category->created_at }}</td>
                                                 <td>{{ $category->updated_at }}</td>
                                                 <td>
+                                                    <a href="{{route('admin.category.edit', ['id' => $category->id])}}" type="button"
+                                                        class="btn btn-round btn-warning"><i class="fa fa-pen" aria-hidden="true"></i>
+                                                    </a> 
+                                                    <a href="{{route('admin.category.delete', ['id' => $category->id])}}" type="button"
+                                                        class="btn btn-round btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>
+                                                    </a> 
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -72,4 +87,20 @@
         </section>
         <!-- /.content -->
     </div>
+@endsection
+
+@section('append_script')
+<!-- DataTables  & Plugins -->
+<script src="{{asset('admin/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('admin/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{asset('admin/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('admin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{asset('admin/plugins/jszip/jszip.min.js')}}"></script>
+<script src="{{asset('admin/plugins/pdfmake/pdfmake.min.js')}}"></script>
+<script src="{{asset('admin/plugins/pdfmake/vfs_fonts.js')}}"></script>
+<script src="{{asset('admin/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+<script src="{{asset('admin/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+<script src="{{asset('admin/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
 @endsection

@@ -20,15 +20,62 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function form()
+    public function add()
     {
-        return view($this->_view . 'form', [
-        ]);
+        return view($this->_view . 'add');
     }
 
     public function store(CategoryRequest $request)
     {
         Category::create($request->all());
-        return redirect(route('admin.category.form'))->with('message', 'aaaa');
+        return redirect(route('admin.category.index'));
+    }
+
+    public function edit($id)
+    {
+        $category = Category::find($id);
+        if ($category) {
+            return view($this->_view . 'edit', [
+                'category' => $category
+            ]);
+        }
+        return redirect()->route('admin.category.index');
+    }
+
+    public function update(CategoryRequest $request)
+    {
+        $category = Category::find($request->id);
+        if($category) {
+            $category->update($request->all());
+        }
+        return redirect(route('admin.category.index'));
+    }
+
+    public function changeStatusActive($id)
+    {
+        $category = Category::find($id);
+        if ($category) {
+            $category->status = "active";
+            $category->save();
+        }
+        return redirect()->back();
+    }
+    public function changeStatusDisable($id)
+    {
+        $category = Category::find($id);
+        if ($category) {
+            $category->status = "disabled";
+            $category->save();
+        }
+        return redirect()->back();
+    }
+
+    public function destroy($id)
+    {
+        $category = Category::find($id);
+        if ($category) {
+            $category->delete();
+        }
+        return redirect()->back();
     }
 }
