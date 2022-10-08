@@ -1,5 +1,6 @@
 <?php
 
+use Composer\Util\Http\Response;
 use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Expr\FuncCall;
 
@@ -14,16 +15,20 @@ use PhpParser\Node\Expr\FuncCall;
 |
 */
 
+Route::get('/', function(){
+    return Response('', 200);
+});
 
+
+// Admin
 Route::prefix('adminv2')->group(function() {
 
     Route::get('dashboard', 'DashboardController@index')->name('admin.dashboard');
 
-    Route::prefix('/categories')->group(function(){
-        Route::get('/', 'CategoryController@index')->name('admin.categories.index');
-        Route::post('/', 'CategoryController@store')->name('admin.categories.store');
+    Route::prefix('/category')->group(function(){
+        Route::get('/', 'CategoryController@index')->name('admin.category.index');
+        Route::get('/form', 'CategoryController@form')->name('admin.category.form');
+        Route::get('/{id}', 'CategoryController@detail')->name('admin.category.detail');
+        Route::post('/', 'CategoryController@store')->name('admin.category.store');
     });
 });
-
-
-

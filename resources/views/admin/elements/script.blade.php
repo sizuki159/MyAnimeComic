@@ -28,3 +28,4 @@
 <script src="{{asset('admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdmianLTE App -->
 <script src="{{asset('admin/dist/js/adminlte.js')}}"></script>
+@yield('append_script')
