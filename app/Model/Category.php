@@ -9,6 +9,11 @@ class Category extends Model
 {
     protected $fillable = ['name', 'status'];
 
+    public function comics()
+    {
+        return $this->hasMany('App\Model\Comic', 'category_id');
+    }
+
     // Overide boot , ví dụ trước khi create thì làm gì
     protected static function boot()
     {

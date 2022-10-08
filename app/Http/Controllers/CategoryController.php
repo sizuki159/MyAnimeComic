@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CategoryRequest;
-use App\Model\Category;
+use App\Http\Requests\CategoryRequest as MainRequest;
+use App\Model\Category as MainModel;
 use Composer\Util\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -14,7 +14,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::all();
+        $categories = MainModel::all();
         return view($this->_view . 'list', [
             'categories' => $categories
         ]);
@@ -25,15 +25,15 @@ class CategoryController extends Controller
         return view($this->_view . 'add');
     }
 
-    public function store(CategoryRequest $request)
+    public function store(MainRequest $request)
     {
-        Category::create($request->all());
+        MainModel::create($request->all());
         return redirect(route('admin.category.index'));
     }
 
     public function edit($id)
     {
-        $category = Category::find($id);
+        $category = MainModel::find($id);
         if ($category) {
             return view($this->_view . 'edit', [
                 'category' => $category
@@ -42,9 +42,9 @@ class CategoryController extends Controller
         return redirect()->route('admin.category.index');
     }
 
-    public function update(CategoryRequest $request)
+    public function update(MainRequest $request)
     {
-        $category = Category::find($request->id);
+        $category = MainModel::find($request->id);
         if($category) {
             $category->update($request->all());
         }
@@ -53,7 +53,7 @@ class CategoryController extends Controller
 
     public function changeStatusActive($id)
     {
-        $category = Category::find($id);
+        $category = MainModel::find($id);
         if ($category) {
             $category->status = "active";
             $category->save();
@@ -62,7 +62,7 @@ class CategoryController extends Controller
     }
     public function changeStatusDisable($id)
     {
-        $category = Category::find($id);
+        $category = MainModel::find($id);
         if ($category) {
             $category->status = "disabled";
             $category->save();
@@ -72,7 +72,7 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        $category = Category::find($id);
+        $category = MainModel::find($id);
         if ($category) {
             $category->delete();
         }
