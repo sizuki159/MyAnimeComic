@@ -30,7 +30,7 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form method="POST" action="{{ route('admin.comic.store') }}">
+                            <form method="POST" action="{{ route('admin.comic.update') }}">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
@@ -61,6 +61,7 @@
                                         </select>
                                     </div>
                                 </div>
+                                <input type="hidden" name="comic_id" value="{{$comic->id}}">
                                 <!-- /.card-body -->
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Submit</button>

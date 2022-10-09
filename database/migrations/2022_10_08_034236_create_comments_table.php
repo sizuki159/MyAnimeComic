@@ -19,8 +19,8 @@ class CreateCommentsTable extends Migration
             $table->unsignedBigInteger('chapter_id');
             $table->text('comment');
             $table->string('status');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('chapter_id')->references('id')->on('chapters')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('chapter_id')->references('id')->on('chapters')->cascadeOnDelete();
             $table->timestamps();
         });
     }

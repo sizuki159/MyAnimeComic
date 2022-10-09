@@ -20,6 +20,7 @@ Route::get('/', function(){
 });
 
 
+
 // Admin
 Route::prefix('adminv2')->group(function() {
 
@@ -53,5 +54,16 @@ Route::prefix('adminv2')->group(function() {
 
         Route::get('/change-status-active/{id}', 'ComicController@changeStatusActive')->where('id', '[0-9]+')->name('admin.comic.active');
         Route::get('/change-status-disable/{id}', 'ComicController@changeStatusDisable')->where('id', '[0-9]+')->name('admin.comic.disable');
+
+
+        // Chapters
+        Route::get('/{comicId}/chapters', 'ChapterController@index')->where('comicId', '[0-9]+')->name('admin.chapters.index');
+        Route::get('/{comicId}/chapters/add', 'ChapterController@add')->where('comicId', '[0-9]+')->name('admin.chapter.add');
+        Route::post('/chapters/add', 'ChapterController@store')->name('admin.chapter.store');
+        Route::get('/{comicId}/chapter/{chapterId}', 'ChapterController@detail')->where(['comicId', 'chapterId'], '[0-9]+')->name('admin.chapter.detail');
     });
+
+    // Route::prefix('chapter')->group(function() {
+    //     Route::('')
+    // });
 });

@@ -50,7 +50,7 @@ class ComicController extends Controller
 
     public function update(MainRequest $request)
     {
-        $comic = MainModel::find($request->id);
+        $comic = MainModel::find($request->comic_id);
         if($comic) {
             $comic->update($request->all());
         }

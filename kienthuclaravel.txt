@@ -1,0 +1,12 @@
+scope model (local scope, global scope)
+query builder
+route binding model
+
+test (Testcase)
+factory
+
+slug (String slug su dung trong bai viet rat hay)
+
+controller, route --resource
+
+policy - authorize
