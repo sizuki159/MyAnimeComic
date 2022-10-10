@@ -30,7 +30,17 @@ class ComicController extends Controller
 
     public function store(MainRequest $request)
     {
-        MainModel::create($request->all());
+        $comic = MainModel::create($request->except('image'));
+
+        // Upload Image
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $name = 'image.' . $file->extension();
+            $path = public_path() . '/comics/' . $comic->id . '/';
+            $file->move($path, $name);
+            $comic->image = json_encode($name);
+            $comic->save();
+        }
         return redirect(route('admin.comic.index'));
     }
 
@@ -52,7 +62,15 @@ class ComicController extends Controller
     {
         $comic = MainModel::find($request->comic_id);
         if($comic) {
-            $comic->update($request->all());
+            $comic->update($request->except('image'));
+            if($request->hasFile('image')) {
+                $file = $request->file('image');
+                $name = 'image.' . $file->extension();
+                $path = public_path() . '/comics/' . $comic->id . '/';
+                $file->move($path, $name);
+                $comic->image = json_encode($name);
+                $comic->save();
+            }
         }
         return redirect(route('admin.comic.index'));
     }

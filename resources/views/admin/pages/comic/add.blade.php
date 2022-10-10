@@ -30,7 +30,7 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form method="POST" action="{{ route('admin.comic.store') }}">
+                            <form enctype="multipart/form-data" method="POST" action="{{ route('admin.comic.store') }}">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
@@ -38,6 +38,15 @@
                                         <p class="text-danger">{{ $errors->first('title') }}</p>
                                         <input type="text" class="form-control" name="title" id="title"
                                             placeholder="Enter Title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Image</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="image">
+                                                <label class="custom-file-label">Choose file</label>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="author">Author</label>
@@ -56,7 +65,7 @@
                                         <label>Category</label>
                                         <select name="category_id" class="form-control select2" style="width: 100%;">
                                             @foreach ($categories as $category)
-                                            <option value="{{$category->id}}">{{$category->name}}</option>
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -73,4 +82,15 @@
             </div>
         </section>
     </div>
+@endsection
+
+
+@section('append_script')
+    <!-- bs-custom-file-input -->
+    <script src="{{ asset('admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+    <script>
+        $(function() {
+            bsCustomFileInput.init();
+        });
+    </script>
 @endsection

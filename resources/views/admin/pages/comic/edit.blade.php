@@ -30,7 +30,7 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form method="POST" action="{{ route('admin.comic.update') }}">
+                            <form enctype="multipart/form-data" method="POST" action="{{ route('admin.comic.update') }}">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
@@ -38,6 +38,15 @@
                                         <p class="text-danger">{{ $errors->first('title') }}</p>
                                         <input value="{{$comic->title}}" type="text" class="form-control" name="title" id="title"
                                             placeholder="Enter Title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Image</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="image">
+                                                <label class="custom-file-label">Choose file</label>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="author">Author</label>
@@ -74,4 +83,14 @@
             </div>
         </section>
     </div>
+@endsection
+
+@section('append_script')
+    <!-- bs-custom-file-input -->
+    <script src="{{ asset('admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+    <script>
+        $(function() {
+            bsCustomFileInput.init();
+        });
+    </script>
 @endsection

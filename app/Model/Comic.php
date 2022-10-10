@@ -7,7 +7,7 @@ use Illuminate\Support\Carbon;
 
 class Comic extends Model
 {
-    protected $fillable = ['title', 'author', 'status', 'category_id'];
+    protected $fillable = ['title', 'image', 'author', 'status', 'category_id'];
 
     public function category()
     {
