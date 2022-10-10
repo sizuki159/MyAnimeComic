@@ -3,13 +3,24 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Chapter extends Model
 {
-    protected $fillable = ['name', 'comic_id', 'source', 'status'];
+    protected $fillable = ['name', 'chapter_number', 'comic_id', 'source', 'status'];
 
     public function comic()
     {
         return $this->belongsTo('App\Model\Comic', 'comic_id');
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->diffForHumans();
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->diffForHumans();
     }
 }

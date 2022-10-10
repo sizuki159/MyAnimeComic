@@ -57,10 +57,11 @@ Route::prefix('adminv2')->group(function() {
 
 
         // Chapters
-        Route::get('/{comicId}/chapters', 'ChapterController@index')->where('comicId', '[0-9]+')->name('admin.chapters.index');
+        Route::get('/{comicId}/chapters', 'ChapterController@list')->where('comicId', '[0-9]+')->name('admin.chapters.list');
         Route::get('/{comicId}/chapters/add', 'ChapterController@add')->where('comicId', '[0-9]+')->name('admin.chapter.add');
         Route::post('/chapters/add', 'ChapterController@store')->name('admin.chapter.store');
-        Route::get('/{comicId}/chapter/{chapterId}', 'ChapterController@detail')->where(['comicId', 'chapterId'], '[0-9]+')->name('admin.chapter.detail');
+
+        Route::get('/{comicId}/chapter/{chapterNumber}', 'ChapterController@preview')->where(['comicId', 'chapterId'], '[0-9]+')->name('admin.chapter.preview');
     });
 
     // Route::prefix('chapter')->group(function() {

@@ -37,7 +37,8 @@
                                     <div class="form-group">
                                         <label for="name">Name</label>
                                         <p class="text-danger">{{ $errors->first('name') }}</p>
-                                        <input type="text" class="form-control" name="name" id="name"
+
+                                        <input readonly value="Chapter {{$chapter_number}}" type="text" class="form-control" name="name" id="name"
                                             placeholder="Enter Name">
                                     </div>
 
@@ -67,6 +68,7 @@
                                     </div>
                                 </div>
                                 <input type="hidden" name="comic_id" value="{{ $comic->id }}">
+                                <input type="hidden" name="chapter_number" value="{{$chapter_number}}">
                                 <!-- /.card-body -->
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Submit</button>

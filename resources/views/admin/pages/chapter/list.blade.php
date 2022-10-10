@@ -14,10 +14,10 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Comics List</h1>
+                        <h1 class="m-0">Chapters List</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
-                        <a href="{{route('admin.comic.add')}}" class="float-sm-right btn btn-success"><i class="fa fa-plus-circle"></i> Thêm mới</a>
+                        <a href="{{route('admin.chapter.add', ['comicId' => $comic->id])}}" class="float-sm-right btn btn-success"><i class="fa fa-plus-circle"></i> Thêm mới</a>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -31,7 +31,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Comics</h3>
+                                <h3 class="card-title">Chapter List - <span style="color: red;">{{$comic->title}}</span></h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -39,43 +39,25 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Title</th>
-                                            <th>Author</th>
-                                            <th>Status</th>
-                                            <th>Category</th>
+                                            <th>Name</th>
+                                            <th>Chapter Number</th>
                                             <th>Create At</th>
                                             <th>Update At</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($comics as $comic)
+                                        @foreach ($chapters as $chapter)
                                             <tr>
-                                                <td>{{ $comic->id }}</td>
-                                                <td>{{ $comic->title }}</td>
-                                                <td>{{ $comic->author }}</td>
+                                                <td>{{$chapter->id}}</td>
+                                                <td>{{$chapter->name}}</td>
+                                                <td>{{$chapter->chapter_number}}</td>
+                                                <td>{{$chapter->created_at}}</td>
+                                                <td>{{$chapter->updated_at}}</td>
                                                 <td>
-                                                    @if ($comic->status == "active")
-                                                    <a href="{{route('admin.comic.disable', ['id' => $comic->id])}}" type="button"
-                                                    class="btn btn-round btn-success">Active</a> 
-                                                    @else
-                                                    <a href="{{route('admin.comic.active', ['id' => $comic->id])}}" type="button"
-                                                    class="btn btn-round btn-danger">Disabled</a> 
-                                                    @endif
-                                                </td>
-                                                <td>{{ optional($comic->category)->name }}</td>
-                                                <td>{{ $comic->created_at }}</td>
-                                                <td>{{ $comic->updated_at }}</td>
-                                                <td>
-                                                    <a href="{{route('admin.comic.edit', ['id' => $comic->id])}}" type="button"
-                                                        class="btn btn-round btn-warning"><i class="fa fa-pen" aria-hidden="true"></i>
+                                                    <a href="{{route('admin.chapter.preview', ['comicId' => $comic->id, 'chapterNumber' => $chapter->chapter_number])}}" type="button"
+                                                        class="btn btn-round btn-warning"><i class="fa fa-eye" aria-hidden="true"></i>
                                                     </a> 
-                                                    <a href="{{route('admin.comic.delete', ['id' => $comic->id])}}" type="button"
-                                                        class="btn btn-round btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>
-                                                    </a>
-                                                    <a href="{{route('admin.chapters.list', ['comicId' => $comic->id])}}" type="button"
-                                                        class="btn btn-round btn-danger"><i class="fa fa-eye" aria-hidden="true"></i>
-                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach
