@@ -8,5 +8,11 @@ factory
 slug (String slug su dung trong bai viet rat hay)
 
 controller, route --resource
+customAttribute Model (dùng để thêm fields hoặc edit format fields)
 
 policy - authorize
+
+
+
+
+https://stackoverflow.com/questions/63850380/laravel-check-if-model-is-child-of-a-relation

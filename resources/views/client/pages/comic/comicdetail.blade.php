@@ -9,8 +9,7 @@
         <div class="col-lg-9">
             <div class="anime__details__text">
                 <div class="anime__details__title">
-                    <h3>Fate Stay Night: Unlimited Blade</h3>
-                    <span>フェイト／ステイナイト, Feito／sutei naito</span>
+                    <h3>{{$comic->title}}</h3>
                 </div>
                 <div class="anime__details__rating">
                     <div class="rating">
@@ -22,28 +21,13 @@
                     </div>
                     <span>1.029 Votes</span>
                 </div>
-                <p>Every human inhabiting the world of Alcia is branded by a “Count” or a number written on
-                    their body. For Hina’s mother, her total drops to 0 and she’s pulled into the Abyss,
-                    never to be seen again. But her mother’s last words send Hina on a quest to find a
-                    legendary hero from the Waste War - the fabled Ace!</p>
+                <p>{{$comic->description}}</p>
                 <div class="anime__details__widget">
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
                             <ul>
-                                <li><span>Type:</span> TV Series</li>
-                                <li><span>Studios:</span> Lerche</li>
-                                <li><span>Date aired:</span> Oct 02, 2019 to ?</li>
-                                <li><span>Status:</span> Airing</li>
-                                <li><span>Genre:</span> Action, Adventure, Fantasy, Magic</li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <ul>
-                                <li><span>Scores:</span> 7.31 / 1,515</li>
-                                <li><span>Rating:</span> 8.5 / 161 times</li>
-                                <li><span>Duration:</span> 24 min/ep</li>
-                                <li><span>Quality:</span> HD</li>
-                                <li><span>Views:</span> 131,541</li>
+                                <li><span>Time Created:</span> {{$comic->created_at}}</li>
+                                <li><span>Views:</span> {{$comic->totalView}}</li>
                             </ul>
                         </div>
                     </div>

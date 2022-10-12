@@ -68,11 +68,21 @@ Route::domain('admin.' . env('APP_URL'))->group(function() {
 Route::domain('client.' . env('APP_URL'))->group(function () {
 
     Route::namespace('Client')->group(function(){
+
+        // Trang chu
         Route::get('/', 'HomeController@index')->name('client.home');
 
-        Route::get('/detail', function () {
-            return view('client.pages.comic.detail');
+        // Show all category active
+        Route::get('/category', function(){
+            return "All Category";
         });
+
+        // Show all comic of this category
+        Route::get('/{category}', 'CategoryController@showListComic')->name('client.category.show_list_comic');
+
+        // Show detail comic
+        Route::get('/{category}/{comic}', 'ComicController@detail')->name('client.comic.detail');
+        
         Route::get('/login', function () {
             return view('client.pages.auth.login');
         });

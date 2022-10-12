@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Model\Category;
 use App\Model\Chapter;
+use App\Model\Comic;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -15,13 +16,13 @@ class DashboardController extends Controller
     public function index()
     {
         $totalCategory  = Category::all()->count();
-        $totalChapter   = Chapter::all()->count();
+        $totalComic     = Comic::all()->count();
         $totalUser      = User::all()->count();
         $totalComment   = Comment::all()->count();
 
         return view($this->_view . 'index', [
             'totalCategory' => $totalCategory,
-            'totalChapter' => $totalChapter,
+            'totalComic' => $totalComic,
             'totalUser' => $totalUser,
             'totalComment' => $totalComment
         ]);

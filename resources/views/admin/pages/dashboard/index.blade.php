@@ -49,14 +49,14 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>{{ $totalChapter }}</h3>
+                            <h3>{{ $totalComic }}</h3>
 
-                            <p>Chapters</p>
+                            <p>Comics</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i
+                        <a href="{{ route('admin.comic.index') }}" class="small-box-footer">More info <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>

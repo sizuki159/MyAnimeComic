@@ -2,11 +2,12 @@
 
 namespace App\ClientModel;
 
+use App\Model\Category;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class CategoryModel extends ClientModel
+class CategoryModel extends Category
 {
     protected $table = 'categories';
 
