@@ -6,7 +6,9 @@ use App\Model\Chapter;
 use App\Model\Comic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+
 
 class ChapterController extends Controller
 {
@@ -100,5 +102,33 @@ class ChapterController extends Controller
             return $comic->chapters;
         }
         return redirect()->back();
+    }
+
+    public function destroy($chapterId)
+    {
+        $chapter = Chapter::findOrFail($chapterId);
+        $pathImage = public_path('comics\\' . $chapter->comic_id . '\chapters\\' . $chapter->chapter_number);
+        self::deleteDir($pathImage);
+        $chapter->delete();
+        return redirect()->back();
+    }
+
+    private static function deleteDir($dirPath)
+    {
+        if (!is_dir($dirPath)) {
+            return;
+        }
+        if (substr($dirPath, strlen($dirPath) - 1, 1) != '/') {
+            $dirPath .= '/';
+        }
+        $files = glob($dirPath . '*', GLOB_MARK);
+        foreach ($files as $file) {
+            if (is_dir($file)) {
+                self::deleteDir($file);
+            } else {
+                unlink($file);
+            }
+        }
+        rmdir($dirPath);
     }
 }

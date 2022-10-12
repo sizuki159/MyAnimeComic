@@ -55,9 +55,13 @@
                                                 <td>{{$chapter->created_at}}</td>
                                                 <td>{{$chapter->updated_at}}</td>
                                                 <td>
-                                                    <a href="{{route('admin.chapter.preview', ['comicId' => $comic->id, 'chapterNumber' => $chapter->chapter_number])}}" type="button"
+                                                    <a title="Preview Chapter" href="{{route('admin.chapter.preview', ['comicId' => $comic->id, 'chapterNumber' => $chapter->chapter_number])}}" type="button"
                                                         class="btn btn-round btn-warning"><i class="fa fa-eye" aria-hidden="true"></i>
-                                                    </a> 
+                                                    </a>
+                                                    <a title="Delete" href="{{ route('admin.chapter.destroy', ['id' => $chapter->id]) }}"
+                                                        type="button" class="btn btn-round btn-danger"><i
+                                                            class="fa fa-trash" aria-hidden="true"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach

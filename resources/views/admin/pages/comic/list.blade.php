@@ -74,15 +74,15 @@
                                                 <td>{{ $comic->created_at }}</td>
                                                 <td>{{ $comic->updated_at }}</td>
                                                 <td>
-                                                    <a href="{{ route('admin.comic.edit', ['id' => $comic->id]) }}"
+                                                    <a title="Edit" href="{{ route('admin.comic.edit', ['id' => $comic->id]) }}"
                                                         type="button" class="btn btn-round btn-warning"><i
                                                             class="fa fa-pen" aria-hidden="true"></i>
                                                     </a>
-                                                    <a href="{{ route('admin.comic.delete', ['id' => $comic->id]) }}"
+                                                    <a title="Delete" href="{{ route('admin.comic.delete', ['id' => $comic->id]) }}"
                                                         type="button" class="btn btn-round btn-danger"><i
                                                             class="fa fa-trash" aria-hidden="true"></i>
                                                     </a>
-                                                    <a href="{{ route('admin.chapters.list', ['comicId' => $comic->id]) }}"
+                                                    <a title="View Chapters" href="{{ route('admin.chapters.list', ['comicId' => $comic->id]) }}"
                                                         type="button" class="btn btn-round btn-danger"><i class="fa fa-eye"
                                                             aria-hidden="true"></i>
                                                     </a>

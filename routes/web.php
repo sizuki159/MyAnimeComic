@@ -36,6 +36,8 @@ Route::prefix('adminv2')->group(function() {
         Route::post('/update', 'CategoryController@update')->name('admin.category.update');
 
         Route::get('/delete/{id}', 'CategoryController@destroy')->where('id', '[0-9]+')->name('admin.category.delete');
+        
+        Route::get('{id}/comics', 'CategoryController@listComic')->where('id', '[0-9]+')->name('admin.category.listComic');
 
         Route::get('/change-status-active/{id}', 'CategoryController@changeStatusActive')->where('id', '[0-9]+')->name('admin.category.active');
         Route::get('/change-status-disable/{id}', 'CategoryController@changeStatusDisable')->where('id', '[0-9]+')->name('admin.category.disable');
@@ -60,8 +62,8 @@ Route::prefix('adminv2')->group(function() {
         Route::get('/{comicId}/chapters', 'ChapterController@list')->where('comicId', '[0-9]+')->name('admin.chapters.list');
         Route::get('/{comicId}/chapters/add', 'ChapterController@add')->where('comicId', '[0-9]+')->name('admin.chapter.add');
         Route::post('/chapters/add', 'ChapterController@store')->name('admin.chapter.store');
-
         Route::get('/{comicId}/chapter/{chapterNumber}', 'ChapterController@preview')->where(['comicId', 'chapterId'], '[0-9]+')->name('admin.chapter.preview');
+        Route::get('/chapter/delete/{id}', 'ChapterController@destroy')->where('id', '[0-9]+')->name('admin.chapter.destroy');
     });
 
     // Route::prefix('chapter')->group(function() {
