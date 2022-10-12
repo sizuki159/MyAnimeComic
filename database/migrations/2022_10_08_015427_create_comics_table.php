@@ -16,8 +16,10 @@ class CreateComicsTable extends Migration
         Schema::create('comics', function (Blueprint $table) {
             $table->id();
             $table->text('title');
+            $table->text('slug');
             $table->string('image')->nullable();
             $table->text('author')->nullable();
+            $table->text('description')->nullable();
             $table->string('status');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();

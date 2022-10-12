@@ -20,3 +20,6 @@
     </section>
     <!-- Product Section End -->
 @endsection
+
+@section('append_script')
+@endsection

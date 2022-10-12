@@ -6,3 +6,4 @@
 <script src="{{asset('client/js/jquery.slicknav.js')}}"></script>
 <script src="{{asset('client/js/owl.carousel.min.js')}}"></script>
 <script src="{{asset('client/js/main.js')}}"></script>
+@yield('append_script')

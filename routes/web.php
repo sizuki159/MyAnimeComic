@@ -32,6 +32,7 @@ Route::domain('admin.' . env('APP_URL'))->group(function() {
     
             Route::get('/delete/{id}', 'CategoryController@destroy')->where('id', '[0-9]+')->name('admin.category.delete');
             
+            // View all comics of this category
             Route::get('{id}/comics', 'CategoryController@listComic')->where('id', '[0-9]+')->name('admin.category.listComic');
     
             Route::get('/change-status-active/{id}', 'CategoryController@changeStatusActive')->where('id', '[0-9]+')->name('admin.category.active');
@@ -65,16 +66,18 @@ Route::domain('admin.' . env('APP_URL'))->group(function() {
 
 // Client
 Route::domain('client.' . env('APP_URL'))->group(function () {
-    Route::get('/', function () {
-        return view('client.pages.home.index');
-    });
-    Route::get('/detail', function () {
-        return view('client.pages.comic.detail');
-    });
-    Route::get('/login', function () {
-        return view('client.pages.auth.login');
-    });
-    Route::get('/signup', function () {
-        return view('client.pages.auth.signup');
+
+    Route::namespace('Client')->group(function(){
+        Route::get('/', 'HomeController@index')->name('client.home');
+
+        Route::get('/detail', function () {
+            return view('client.pages.comic.detail');
+        });
+        Route::get('/login', function () {
+            return view('client.pages.auth.login');
+        });
+        Route::get('/signup', function () {
+            return view('client.pages.auth.signup');
+        });
     });
 });

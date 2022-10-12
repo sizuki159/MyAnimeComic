@@ -19,6 +19,7 @@ class CreateChaptersTable extends Migration
             $table->unsignedInteger('chapter_number');
             $table->unsignedBigInteger('comic_id');
             $table->foreign('comic_id')->references('id')->on('comics')->cascadeOnDelete();
+            $table->unsignedBigInteger('total_view')->default(0);
             $table->longText('source');
             $table->string('status');
             $table->timestamps();

@@ -55,6 +55,11 @@
                                             placeholder="Enter Author">
                                     </div>
                                     <div class="form-group">
+                                        <label for="description">Description</label>
+                                        <p class="text-danger">{{ $errors->first('description') }}</p>
+                                        <input type="text" class="form-control" name="description" id="description"
+                                            placeholder="Enter Description">                                    </div>
+                                    <div class="form-group">
                                         <label>Status</label>
                                         <select name="status" class="form-control select2" style="width: 100%;">
                                             <option selected="selected" value="active">Active</option>

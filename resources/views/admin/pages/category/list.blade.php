@@ -69,7 +69,7 @@
                                                     <a title="Delete" href="{{route('admin.category.delete', ['id' => $category->id])}}" type="button"
                                                         class="btn btn-round btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>
                                                     </a>
-                                                    <a title="View Chapters" href="{{ route('admin.category.listComic', ['id' => $category->id]) }}"
+                                                    <a title="View Comics" href="{{ route('admin.category.listComic', ['id' => $category->id]) }}"
                                                         type="button" class="btn btn-round btn-danger"><i class="fa fa-eye"
                                                             aria-hidden="true"></i>
                                                     </a>

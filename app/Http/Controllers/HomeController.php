@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest as MainRequest;
 use App\Model\Category as MainModel;
-use App\Model\Category;
 use Composer\Util\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -78,14 +77,5 @@ class CategoryController extends Controller
             $category->delete();
         }
         return redirect()->back();
-    }
-
-    public function listComic($categoryId)
-    {
-        $category = Category::findOrFail($categoryId);
-        return view($this->_view . 'listcomic', [
-            'comics' => $category->comics,
-            'category' => $category
-        ]);
     }
 }
