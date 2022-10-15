@@ -27,16 +27,16 @@ Route::domain('admin.' . env('APP_URL'))->group(function() {
             Route::get('/add', 'CategoryController@add')->name('admin.category.add');
             Route::post('/store', 'CategoryController@store')->name('admin.category.store');
     
-            Route::get('/edit/{id}', 'CategoryController@edit')->where('id', '[0-9]+')->name('admin.category.edit');
-            Route::post('/update', 'CategoryController@update')->name('admin.category.update');
+            Route::get('/edit/{category}', 'CategoryController@edit')->name('admin.category.edit');
+            Route::post('/update/{category}', 'CategoryController@update')->name('admin.category.update');
     
-            Route::get('/delete/{id}', 'CategoryController@destroy')->where('id', '[0-9]+')->name('admin.category.delete');
+            Route::get('/delete/{category}', 'CategoryController@destroy')->name('admin.category.delete');
             
             // View all comics of this category
-            Route::get('{id}/comics', 'CategoryController@listComic')->where('id', '[0-9]+')->name('admin.category.listComic');
+            Route::get('{category}/comics', 'CategoryController@listComic')->name('admin.category.listComic');
     
-            Route::get('/change-status-active/{id}', 'CategoryController@changeStatusActive')->where('id', '[0-9]+')->name('admin.category.active');
-            Route::get('/change-status-disable/{id}', 'CategoryController@changeStatusDisable')->where('id', '[0-9]+')->name('admin.category.disable');
+            Route::get('/change-status-active/{category}', 'CategoryController@changeStatusActive')->name('admin.category.active');
+            Route::get('/change-status-disable/{category}', 'CategoryController@changeStatusDisable')->name('admin.category.disable');
         });
     
         Route::prefix('comic')->group(function() {

@@ -53,23 +53,23 @@
                                                 <td>{{ $category->name }}</td>
                                                 <td>
                                                     @if ($category->status == "active")
-                                                    <a title="Status" href="{{route('admin.category.disable', ['id' => $category->id])}}" type="button"
+                                                    <a title="Status" href="{{route('admin.category.disable', ['category' => $category])}}" type="button"
                                                     class="btn btn-round btn-success">Active</a> 
                                                     @else
-                                                    <a title="Status" href="{{route('admin.category.active', ['id' => $category->id])}}" type="button"
+                                                    <a title="Status" href="{{route('admin.category.active', ['category' => $category])}}" type="button"
                                                     class="btn btn-round btn-danger">Disabled</a> 
                                                     @endif
                                                 </td>
                                                 <td>{{ $category->created_at }}</td>
                                                 <td>{{ $category->updated_at }}</td>
                                                 <td>
-                                                    <a title="Edit" href="{{route('admin.category.edit', ['id' => $category->id])}}" type="button"
+                                                    <a title="Edit" href="{{route('admin.category.edit', ['category' => $category])}}" type="button"
                                                         class="btn btn-round btn-warning"><i class="fa fa-pen" aria-hidden="true"></i>
                                                     </a> 
-                                                    <a title="Delete" href="{{route('admin.category.delete', ['id' => $category->id])}}" type="button"
+                                                    <a title="Delete" href="{{route('admin.category.delete', ['category' => $category])}}" type="button"
                                                         class="btn btn-round btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>
                                                     </a>
-                                                    <a title="View Comics" href="{{ route('admin.category.listComic', ['id' => $category->id]) }}"
+                                                    <a title="View Comics" href="{{ route('admin.category.listComic', ['category' => $category]) }}"
                                                         type="button" class="btn btn-round btn-danger"><i class="fa fa-eye"
                                                             aria-hidden="true"></i>
                                                     </a>

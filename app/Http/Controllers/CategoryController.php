@@ -32,57 +32,40 @@ class CategoryController extends Controller
         return redirect(route('admin.category.index'));
     }
 
-    public function edit($id)
+    public function edit(Category $category)
     {
-        $category = MainModel::find($id);
-        if ($category) {
-            return view($this->_view . 'edit', [
-                'category' => $category
-            ]);
-        }
-        return redirect()->route('admin.category.index');
+        return view($this->_view . 'edit', [
+            'category' => $category
+        ]);
     }
 
-    public function update(MainRequest $request)
+    public function update(MainRequest $request, Category $category)
     {
-        $category = MainModel::find($request->id);
-        if($category) {
-            $category->update($request->all());
-        }
+        $category->update($request->all());
         return redirect(route('admin.category.index'));
     }
 
-    public function changeStatusActive($id)
+    public function changeStatusActive(Category $category)
     {
-        $category = MainModel::find($id);
-        if ($category) {
-            $category->status = "active";
-            $category->save();
-        }
+        $category->status = "active";
+        $category->save();
         return redirect()->back();
     }
-    public function changeStatusDisable($id)
+    public function changeStatusDisable(Category $category)
     {
-        $category = MainModel::find($id);
-        if ($category) {
-            $category->status = "disabled";
-            $category->save();
-        }
+        $category->status = "inactive";
+        $category->save();
         return redirect()->back();
     }
 
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        $category = MainModel::find($id);
-        if ($category) {
-            $category->delete();
-        }
+        $category->delete();
         return redirect()->back();
     }
 
-    public function listComic($categoryId)
+    public function listComic(Category $category)
     {
-        $category = Category::findOrFail($categoryId);
         return view($this->_view . 'listcomic', [
             'comics' => $category->comics,
             'category' => $category

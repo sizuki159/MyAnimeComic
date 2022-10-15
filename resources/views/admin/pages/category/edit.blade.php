@@ -30,19 +30,9 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form method="POST" action="{{ route('admin.category.update') }}">
+                            <form method="POST" action="{{ route('admin.category.update', ['category' => $category]) }}">
                                 @csrf
                                 <div class="card-body">
-
-                                    @if (\Session::has('message'))
-                                        <div class="alert alert-success alert-dismissible">
-                                            <button type="button" class="close" data-dismiss="alert"
-                                                aria-hidden="true">&times;</button>
-                                            <h5><i class="icon fas fa-check"></i> Success!</h5>
-                                            {!! \Session::get('message') !!}
-                                        </div>
-                                    @endif
-
                                     <div class="form-group">
                                         <label for="name">Name</label>
                                         <p class="text-danger">{{ $errors->first('name') }}</p>
@@ -56,7 +46,6 @@
                                             <option {{$category->status ==  "disabled" ? "selected" : ""}} value="disabled">Disable</option>
                                         </select>
                                     </div>
-                                    <input type="hidden" name="id" value="{{$category->id}}">
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
