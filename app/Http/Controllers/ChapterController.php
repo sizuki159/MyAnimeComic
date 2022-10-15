@@ -14,53 +14,45 @@ class ChapterController extends Controller
 {
     private $_view = "admin.pages.chapter.";
 
-    public function list($comicId)
+    public function list(Comic $comic)
     {
-        $comic = Comic::find($comicId);
-        if ($comic) {
-            return view($this->_view . 'list', [
-                'chapters' => $comic->chapters,
-                'comic' => $comic
-            ]);
-        }
+        return view($this->_view . 'list', [
+            'chapters' => $comic->chapters,
+            'comic' => $comic
+        ]);
     }
 
-    public function preview($comicId, $chapterNumber)
+    public function preview(Comic $comic, $chapterNumber)
     {
-        $comic = Comic::find($comicId);
-        if ($comic) {
-            $chapter = $comic->chapters()->where('chapter_number', '=', $chapterNumber)->first();
-            if ($chapter) {
-                $chapter->source = json_decode($chapter->source);
-                return view($this->_view . 'preview', [
-                    'chapter' => $chapter
-                ]);
-            }
 
-
-            // if(count($comic->chapters) > 0) {
-            //     for ($i=0; $i < count($comic->chapters); $i++) { 
-            //         $comic->chapters[$i]->source = json_decode($comic->chapters[$i]->source);
-            //     }
-            //     return view($this->_view . 'index', [
-            //         'chapters' => $comic->chapters, true
-            //     ]);
-            // }
-        }
-    }
-
-    public function add($comicId)
-    {
-        $comic = Comic::find($comicId);
-        if ($comic) {
-            $chapter_number = DB::table('chapters')->where('comic_id', $comicId)->max('chapter_number');
-            $chapter_number = $chapter_number || 0;
-            return view($this->_view . 'add', [
-                'comic' => $comic,
-                'chapter_number' => ($chapter_number + 1)
+        $chapter = $comic->chapters()->where('chapter_number', '=', $chapterNumber)->first();
+        if ($chapter) {
+            $chapter->source = json_decode($chapter->source);
+            return view($this->_view . 'preview', [
+                'chapter' => $chapter
             ]);
         }
-        return redirect()->back();
+
+
+        // if(count($comic->chapters) > 0) {
+        //     for ($i=0; $i < count($comic->chapters); $i++) { 
+        //         $comic->chapters[$i]->source = json_decode($comic->chapters[$i]->source);
+        //     }
+        //     return view($this->_view . 'index', [
+        //         'chapters' => $comic->chapters, true
+        //     ]);
+        // }
+
+    }
+
+    public function add(Comic $comic)
+    {
+        $chapter_number = DB::table('chapters')->where('comic_id', $comic->id)->max('chapter_number');
+        $chapter_number = $chapter_number || 0;
+        return view($this->_view . 'add', [
+            'comic' => $comic,
+            'chapter_number' => ($chapter_number + 1)
+        ]);
     }
 
     public function store(Request $request)
@@ -95,18 +87,14 @@ class ChapterController extends Controller
         return redirect(route('admin.chapters.list', ['comicId' => $request->comic_id]));
     }
 
-    public function detail($comicId, $chapterId)
+    public function detail(Comic $comic, Chapter $chapter)
     {
-        $comic = Comic::find($comicId);
-        if ($comic) {
-            return $comic->chapters;
-        }
-        return redirect()->back();
+
+        return $comic->chapters;
     }
 
-    public function destroy($chapterId)
+    public function destroy(Chapter $chapter)
     {
-        $chapter = Chapter::findOrFail($chapterId);
         $pathImage = public_path('comics\\' . $chapter->comic_id . '\chapters\\' . $chapter->chapter_number);
         self::deleteDir($pathImage);
         $chapter->delete();
