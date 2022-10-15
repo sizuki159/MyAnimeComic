@@ -61,6 +61,22 @@ Route::domain('admin.' . env('APP_URL'))->group(function() {
             Route::get('/{comicId}/chapter/{chapterNumber}', 'ChapterController@preview')->where(['comicId', 'chapterId'], '[0-9]+')->name('admin.chapter.preview');
             Route::get('/chapter/delete/{id}', 'ChapterController@destroy')->where('id', '[0-9]+')->name('admin.chapter.destroy');
         });
+
+        Route::prefix('slider')->group(function() {
+            Route::get('/', 'SliderController@index')->name('admin.slider.index');
+            
+            Route::get('/add', 'SliderController@add')->name('admin.slider.add');
+            Route::post('/store', 'SliderController@store')->name('admin.slider.store');
+    
+            Route::get('/edit/{slider}', 'SliderController@edit')->name('admin.slider.edit');
+            Route::post('/update/{slider}', 'SliderController@update')->name('admin.slider.update');
+    
+            Route::get('/delete/{slider}', 'SliderController@destroy')->name('admin.slider.delete');
+    
+            Route::get('/change-status-active/{slider}', 'SliderController@changeStatusActive')->name('admin.slider.active');
+            Route::get('/change-status-disable/{slider}', 'SliderController@changeStatusDisable')->name('admin.slider.disable');
+
+        });
     //});
 });
 

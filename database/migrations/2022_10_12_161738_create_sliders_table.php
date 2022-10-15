@@ -17,7 +17,7 @@ class CreateSlidersTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('description');
-            $table->string('image');
+            $table->string('image')->default('');
             $table->text('url');
             $table->unsignedInteger('priority')->default(0);
             $table->string('status');
