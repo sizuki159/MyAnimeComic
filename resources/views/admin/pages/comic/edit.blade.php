@@ -30,7 +30,7 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form enctype="multipart/form-data" method="POST" action="{{ route('admin.comic.update') }}">
+                            <form enctype="multipart/form-data" method="POST" action="{{ route('admin.comic.update', ['comic' => $comic]) }}">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
@@ -70,7 +70,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                <input type="hidden" name="comic_id" value="{{$comic->id}}">
                                 <!-- /.card-body -->
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Submit</button>

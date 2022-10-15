@@ -44,18 +44,14 @@ class ComicController extends Controller
         return redirect(route('admin.comic.index'));
     }
 
-    public function edit($id)
+    public function edit(MainModel $comic)
     {
-        $comic = MainModel::find($id);
         $categories = Category::all();
 
-        if ($comic) {
-            return view($this->_view . 'edit', [
-                'comic' => $comic,
-                'categories' => $categories
-            ]);
-        }
-        return redirect()->route('admin.comic.index');
+        return view($this->_view . 'edit', [
+            'comic' => $comic,
+            'categories' => $categories
+        ]);
     }
 
     public function update(MainRequest $request)
@@ -75,31 +71,22 @@ class ComicController extends Controller
         return redirect(route('admin.comic.index'));
     }
 
-    public function changeStatusActive($id)
+    public function changeStatusActive(MainModel $comic)
     {
-        $comic = MainModel::find($id);
-        if ($comic) {
-            $comic->status = "active";
-            $comic->save();
-        }
+        $comic->status = "active";
+        $comic->save();
         return redirect()->back();
     }
-    public function changeStatusDisable($id)
+    public function changeStatusDisable(MainModel $comic)
     {
-        $comic = MainModel::find($id);
-        if ($comic) {
-            $comic->status = "disabled";
-            $comic->save();
-        }
+        $comic->status = "disabled";
+        $comic->save();
         return redirect()->back();
     }
 
-    public function destroy($id)
+    public function destroy(MainModel $comic)
     {
-        $comic = MainModel::find($id);
-        if ($comic) {
-            $comic->delete();
-        }
+        $comic->delete();
         return redirect()->back();
     }
 }

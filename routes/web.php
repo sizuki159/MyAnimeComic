@@ -45,21 +45,21 @@ Route::domain('admin.' . env('APP_URL'))->group(function() {
             Route::get('/add', 'ComicController@add')->name('admin.comic.add');
             Route::post('/store', 'ComicController@store')->name('admin.comic.store');
     
-            Route::get('/edit/{id}', 'ComicController@edit')->where('id', '[0-9]+')->name('admin.comic.edit');
-            Route::post('/update', 'ComicController@update')->name('admin.comic.update');
+            Route::get('/edit/{comic}', 'ComicController@edit')->name('admin.comic.edit');
+            Route::post('/update/{comic}', 'ComicController@update')->name('admin.comic.update');
     
-            Route::get('/delete/{id}', 'ComicController@destroy')->where('id', '[0-9]+')->name('admin.comic.delete');
+            Route::get('/delete/{comic}', 'ComicController@destroy')->name('admin.comic.delete');
     
-            Route::get('/change-status-active/{id}', 'ComicController@changeStatusActive')->where('id', '[0-9]+')->name('admin.comic.active');
-            Route::get('/change-status-disable/{id}', 'ComicController@changeStatusDisable')->where('id', '[0-9]+')->name('admin.comic.disable');
+            Route::get('/change-status-active/{comic}', 'ComicController@changeStatusActive')->name('admin.comic.active');
+            Route::get('/change-status-disable/{comic}', 'ComicController@changeStatusDisable')->name('admin.comic.disable');
     
     
             // Chapters
-            Route::get('/{comicId}/chapters', 'ChapterController@list')->where('comicId', '[0-9]+')->name('admin.chapters.list');
-            Route::get('/{comicId}/chapters/add', 'ChapterController@add')->where('comicId', '[0-9]+')->name('admin.chapter.add');
+            Route::get('/{comic}/chapters', 'ChapterController@list')->name('admin.chapters.list');
+            Route::get('/{comic}/chapters/add', 'ChapterController@add')->name('admin.chapter.add');
             Route::post('/chapters/add', 'ChapterController@store')->name('admin.chapter.store');
-            Route::get('/{comicId}/chapter/{chapterNumber}', 'ChapterController@preview')->where(['comicId', 'chapterId'], '[0-9]+')->name('admin.chapter.preview');
-            Route::get('/chapter/delete/{id}', 'ChapterController@destroy')->where('id', '[0-9]+')->name('admin.chapter.destroy');
+            Route::get('/{comic}/chapter/{chapterNumber}', 'ChapterController@preview')->where('chapterNumber', '[0-9]+')->name('admin.chapter.preview');
+            Route::get('/chapter/delete/{chapter}', 'ChapterController@destroy')->name('admin.chapter.destroy');
         });
 
         Route::prefix('slider')->group(function() {

@@ -63,10 +63,10 @@
                                                 <td>{{ $comic->author }}</td>
                                                 <td>
                                                     @if ($comic->status == 'active')
-                                                        <a href="{{ route('admin.comic.disable', ['id' => $comic->id]) }}"
+                                                        <a href="{{ route('admin.comic.disable', ['comic' => $comic]) }}"
                                                             type="button" class="btn btn-round btn-success">Active</a>
                                                     @else
-                                                        <a href="{{ route('admin.comic.active', ['id' => $comic->id]) }}"
+                                                        <a href="{{ route('admin.comic.active', ['comic' => $comic]) }}"
                                                             type="button" class="btn btn-round btn-danger">Disabled</a>
                                                     @endif
                                                 </td>
@@ -74,15 +74,15 @@
                                                 <td>{{ $comic->created_at }}</td>
                                                 <td>{{ $comic->updated_at }}</td>
                                                 <td>
-                                                    <a title="Edit" href="{{ route('admin.comic.edit', ['id' => $comic->id]) }}"
+                                                    <a title="Edit" href="{{ route('admin.comic.edit', ['comic' => $comic]) }}"
                                                         type="button" class="btn btn-round btn-warning"><i
                                                             class="fa fa-pen" aria-hidden="true"></i>
                                                     </a>
-                                                    <a title="Delete" href="{{ route('admin.comic.delete', ['id' => $comic->id]) }}"
+                                                    <a title="Delete" href="{{ route('admin.comic.delete', ['comic' => $comic]) }}"
                                                         type="button" class="btn btn-round btn-danger"><i
                                                             class="fa fa-trash" aria-hidden="true"></i>
                                                     </a>
-                                                    <a title="View Chapters" href="{{ route('admin.chapters.list', ['comicId' => $comic->id]) }}"
+                                                    <a title="View Chapters" href="{{ route('admin.chapters.list', ['comic' => $comic]) }}"
                                                         type="button" class="btn btn-round btn-danger"><i class="fa fa-eye"
                                                             aria-hidden="true"></i>
                                                     </a>
