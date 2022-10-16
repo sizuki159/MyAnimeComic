@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
+use App\Model\Comment;
 use App\Model\Category;
 use App\Model\Chapter;
 use App\Model\Comic;
