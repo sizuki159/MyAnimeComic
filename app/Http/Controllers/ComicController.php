@@ -35,12 +35,12 @@ class ComicController extends Controller
         // Upload Image
         if($request->hasFile('image')) {
             $file = $request->file('image');
-            $name = $file->getClientOriginalName();
-            $path = config('storage_path.comic') . '/' . $comic->id;
-            $file->storeAs($path, $name);
+            $filename = $file->getClientOriginalName();
+            $path = config('storage_path.comic') . $comic->id;
+            $file->storeAs($path, $filename);
 
             // Update record on database
-            $comic->image = $name;
+            $comic->image = $filename;
             $comic->save();
         }
         return redirect(route('admin.comic.index'));

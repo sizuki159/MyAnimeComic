@@ -53,8 +53,7 @@
                                     <tbody>
                                         @foreach ($comics as $comic)
                                             @php
-                                                $path = 'comics/' . $comic->id . '/';
-                                                $comic->image = json_decode($comic->image);
+                                                $path = config('storage_path.comic_client') . $comic->id . '/';
                                             @endphp
                                             <tr>
                                                 <td>{{ $comic->id }}</td>

@@ -94,8 +94,11 @@ class ChapterController extends Controller
 
     public function destroy(Chapter $chapter)
     {
-        $pathImage = public_path('comics\\' . $chapter->comic_id . '\chapters\\' . $chapter->chapter_number);
-        self::deleteDir($pathImage);
+        // $pathImage = public_path('comics\\' . $chapter->comic_id . '\chapters\\' . $chapter->chapter_number);
+        // self::deleteDir($pathImage);
+        
+        Storage::disk(config('storage_path.comic') . $chapter->comic_id . '\chapters')->delete($chapter->chapter_number);
+
         $chapter->delete();
         return redirect()->back();
     }
