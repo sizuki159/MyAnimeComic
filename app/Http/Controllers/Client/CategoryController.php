@@ -11,11 +11,17 @@ class CategoryController extends ClientController
 {
     private $_pathView = "client.pages.category.";
 
+    public function list()
+    {
+        return "show list category";
+    }
+
     public function showListComic(CategoryModel $category)
     {
-        $listComic = $category->comics;
+        $comics = $category->comics;
         return view($this->_pathView . 'listcomic', [
-            'listComic' => $listComic
+            'comics' => $comics
         ]);
     }
 }
+

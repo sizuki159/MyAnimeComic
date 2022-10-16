@@ -89,12 +89,10 @@ Route::domain('client.' . env('APP_URL'))->group(function () {
         Route::get('/', 'HomeController@index')->name('client.home');
 
         // Show all category active
-        Route::get('/category', function(){
-            return "All Category";
-        });
+        Route::get('/category', 'CategoryController@list')->name('client.category');
 
         // Show all comic of this category
-        Route::get('/{category}', 'CategoryController@showListComic')->name('client.category.show_list_comic');
+        Route::get('/{category}', 'CategoryController@showListComic')->name('client.category.showListComic');
 
         // Show detail comic
         Route::get('/{category}/{comic}', 'ComicController@detail')->name('client.comic.detail');
