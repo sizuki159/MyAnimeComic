@@ -48,10 +48,10 @@ class ChapterController extends Controller
     public function add(Comic $comic)
     {
         $chapter_number = DB::table('chapters')->where('comic_id', $comic->id)->max('chapter_number');
-        $chapter_number = $chapter_number || 0;
+        $chapter_number = $chapter_number == null ? 1 : ($chapter_number + 1);
         return view($this->_view . 'add', [
             'comic' => $comic,
-            'chapter_number' => ($chapter_number + 1)
+            'chapter_number' => $chapter_number
         ]);
     }
 
@@ -84,12 +84,11 @@ class ChapterController extends Controller
         $chapter->status = $request->status;
         $chapter->save();
 
-        return redirect(route('admin.chapters.list', ['comicId' => $request->comic_id]));
+        return redirect(route('admin.chapters.list', ['comic' => $request->comic_id]));
     }
 
     public function detail(Comic $comic, Chapter $chapter)
     {
-
         return $comic->chapters;
     }
 
