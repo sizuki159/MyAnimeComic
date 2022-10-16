@@ -52,13 +52,10 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($comics as $comic)
-                                            @php
-                                                $path = config('storage_path.comic_client') . $comic->id . '/';
-                                            @endphp
                                             <tr>
                                                 <td>{{ $comic->id }}</td>
                                                 <td>{{ $comic->title }}</td>
-                                                <td><img width="100px" src="{{asset($path . $comic->image)}}" alt=""></td>
+                                                <td><img width="100px" src="{{$comic->image}}" alt=""></td>
                                                 <td>{{ $comic->author }}</td>
                                                 <td>
                                                     @if ($comic->status == 'active')

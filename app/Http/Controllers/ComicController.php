@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ComicRequest as MainRequest;
 use App\Model\Category;
 use App\Model\Comic as MainModel;
+use App\Model\Comic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ComicController extends Controller
 {
@@ -33,14 +35,13 @@ class ComicController extends Controller
         $comic = MainModel::create($request->except('image'));
 
         // Upload Image
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = $file->getClientOriginalName();
-            $path = config('storage_path.comic') . $comic->id;
-            $file->storeAs($path, $filename);
+            Storage::disk('do_spaces')->putFileAs($comic->id, $file, $filename, 'public');
 
             // Update record on database
-            $comic->image = $filename;
+            $comic->image = Storage::disk('do_spaces')->url($comic->id . '/' . $filename);
             $comic->save();
         }
         return redirect(route('admin.comic.index'));
@@ -56,19 +57,15 @@ class ComicController extends Controller
         ]);
     }
 
-    public function update(MainRequest $request)
+    public function update(MainRequest $request, Comic $comic)
     {
-        $comic = MainModel::find($request->comic_id);
-        if($comic) {
-            $comic->update($request->except('image'));
-            if($request->hasFile('image')) {
-                $file = $request->file('image');
-                $name = 'image.' . $file->extension();
-                $path = public_path() . '/comics/' . $comic->id . '/';
-                $file->move($path, $name);
-                $comic->image = json_encode($name);
-                $comic->save();
-            }
+        $comic->update($request->except('image'));
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = $file->getClientOriginalName();
+
+            $comic->image = "";
+            $comic->save();
         }
         return redirect(route('admin.comic.index'));
     }
@@ -88,7 +85,13 @@ class ComicController extends Controller
 
     public function destroy(MainModel $comic)
     {
+        // Delete Image From Digital Ocean
+        $path = $comic->id;
+        Storage::disk('do_spaces')->deleteDirectory($path);
+
+        // Delete record DB
         $comic->delete();
+
         return redirect()->back();
     }
 }
