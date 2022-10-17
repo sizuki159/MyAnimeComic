@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class Chapter extends Model
 {
@@ -22,5 +23,13 @@ class Chapter extends Model
     public function getUpdatedAtAttribute($value)
     {
         return Carbon::parse($value)->diffForHumans();
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        static::deleting(function($chapter) {
+            Storage::disk('do_spaces')->deleteDirectory($chapter->comic_id . '/chapters/' . $chapter->chapter_number);
+        });
     }
 }

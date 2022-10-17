@@ -61,10 +61,17 @@ class ComicController extends Controller
     {
         $comic->update($request->except('image'));
         if ($request->hasFile('image')) {
+
+            // delete old image
+            $imageInfo  = pathinfo($comic->image);
+            Storage::disk('do_spaces')->delete($comic->id . '/' . $imageInfo["basename"]);
+
             $file = $request->file('image');
             $filename = $file->getClientOriginalName();
+            Storage::disk('do_spaces')->putFileAs($comic->id, $file, $filename, 'public');
 
-            $comic->image = "";
+            // Update record on database
+            $comic->image = Storage::disk('do_spaces')->url($comic->id . '/' . $filename);
             $comic->save();
         }
         return redirect(route('admin.comic.index'));
@@ -85,13 +92,7 @@ class ComicController extends Controller
 
     public function destroy(MainModel $comic)
     {
-        // Delete Image From Digital Ocean
-        $path = $comic->id;
-        Storage::disk('do_spaces')->deleteDirectory($path);
-
-        // Delete record DB
         $comic->delete();
-
         return redirect()->back();
     }
 }

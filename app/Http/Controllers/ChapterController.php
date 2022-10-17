@@ -24,7 +24,6 @@ class ChapterController extends Controller
 
     public function preview(Comic $comic, $chapterNumber)
     {
-
         $chapter = $comic->chapters()->where('chapter_number', '=', $chapterNumber)->first();
         if ($chapter) {
             $chapter->source = json_decode($chapter->source);
@@ -32,17 +31,6 @@ class ChapterController extends Controller
                 'chapter' => $chapter
             ]);
         }
-
-
-        // if(count($comic->chapters) > 0) {
-        //     for ($i=0; $i < count($comic->chapters); $i++) { 
-        //         $comic->chapters[$i]->source = json_decode($comic->chapters[$i]->source);
-        //     }
-        //     return view($this->_view . 'index', [
-        //         'chapters' => $comic->chapters, true
-        //     ]);
-        // }
-
     }
 
     public function add(Comic $comic)
@@ -93,7 +81,6 @@ class ChapterController extends Controller
 
     public function destroy(Chapter $chapter)
     {
-        Storage::disk('do_spaces')->deleteDirectory($chapter->comic_id . '/chapters/' . $chapter->chapter_number);
         $chapter->delete();
         return redirect()->back();
     }

@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class Comic extends Model
@@ -13,9 +14,15 @@ class Comic extends Model
     public static function boot()
     {
         parent::boot();
+
         static::creating(function($comic){
             $comic->slug = Str::slug($comic->title);
         });
+
+        static::deleting(function($comic) {
+            Storage::disk('do_spaces')->deleteDirectory($comic->id);
+        });
+        
     }
 
     public function category()
