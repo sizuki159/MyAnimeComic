@@ -55,36 +55,35 @@ class ChapterController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Comic $comic)
     {
         $request->validate([
             'name'      => 'required',
             'status'    => ['required', Rule::in(['active', 'disabled'])],
-            'comic_id'  => 'required',
             'chapter_number'  => 'required',
             'image'     => 'required',
             'image.*'   => 'mimes:jpeg,jpg,png,gif|required|max:10000',
         ]);
 
+        $data = [];
         if ($request->hasFile('image')) {
             $image_number = 1;
             foreach ($request->file('image') as $file) {
-                $name = $image_number++ . '.' . $file->extension();
-                $path = public_path() . '/comics/' . $request->comic_id . '/chapters/' . $request->chapter_number . '/';
-                $file->move($path, $name);
-                $data[] = $name;
+                $name = $image_number++ . '.' . $file->getClientOriginalExtension();
+                $path = $comic->id . '/chapters/' . $request->chapter_number;
+                Storage::disk('do_spaces')->putFileAs($path, $file, $name, 'public');
+                $data[] = Storage::disk('do_spaces')->url($path . '/' . $name);
             }
         }
 
         $chapter = new Chapter();
         $chapter->name = $request->name;
         $chapter->chapter_number = $request->chapter_number;
-        $chapter->comic_id = $request->comic_id;
         $chapter->source = json_encode($data);
         $chapter->status = $request->status;
-        $chapter->save();
+        $comic->chapters()->save($chapter);
 
-        return redirect(route('admin.chapters.list', ['comic' => $request->comic_id]));
+        return redirect(route('admin.chapters.list', ['comic' => $comic]));
     }
 
     public function detail(Comic $comic, Chapter $chapter)
@@ -94,31 +93,8 @@ class ChapterController extends Controller
 
     public function destroy(Chapter $chapter)
     {
-        // $pathImage = public_path('comics\\' . $chapter->comic_id . '\chapters\\' . $chapter->chapter_number);
-        // self::deleteDir($pathImage);
-        
-        Storage::disk(config('storage_path.comic') . $chapter->comic_id . '\chapters')->delete($chapter->chapter_number);
-
+        Storage::disk('do_spaces')->deleteDirectory($chapter->comic_id . '/chapters/' . $chapter->chapter_number);
         $chapter->delete();
         return redirect()->back();
-    }
-
-    private static function deleteDir($dirPath)
-    {
-        if (!is_dir($dirPath)) {
-            return;
-        }
-        if (substr($dirPath, strlen($dirPath) - 1, 1) != '/') {
-            $dirPath .= '/';
-        }
-        $files = glob($dirPath . '*', GLOB_MARK);
-        foreach ($files as $file) {
-            if (is_dir($file)) {
-                self::deleteDir($file);
-            } else {
-                unlink($file);
-            }
-        }
-        rmdir($dirPath);
     }
 }

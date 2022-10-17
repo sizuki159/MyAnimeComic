@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Model\Slider as MainModel;
 use App\Http\Requests\SliderRequest as MainRequest;
 use App\Model\Slider;
+use JsonSchema\Uri\Retrievers\FileGetContents;
 
 class SliderController extends Controller
 {
@@ -29,13 +30,10 @@ class SliderController extends Controller
     {
         $slider = MainModel::create($request->except('image'));
 
-        // Upload Image
+        // Image to base64 encode
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $name = 'image.' . $file->extension();
-            $path = public_path() . '/sliders/' . $slider->id . '/';
-            $file->move($path, $name);
-            $slider->image = json_encode($name);
+            $slider->image = "data:image/png;base64," . base64_encode(file_get_contents($file->path()));
             $slider->save();
         }
         return redirect(route('admin.slider.index'));
@@ -53,13 +51,9 @@ class SliderController extends Controller
         $slider->update($request->except('image'));
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $name = 'image.' . $file->extension();
-            $path = public_path() . '/sliders/' . $slider->id . '/';
-            $file->move($path, $name);
-            $slider->image = json_encode($name);
+            $slider->image = "data:image/png;base64," . base64_encode(file_get_contents($file->path()));
             $slider->save();
         }
-
         return redirect(route('admin.slider.index'));
     }
 

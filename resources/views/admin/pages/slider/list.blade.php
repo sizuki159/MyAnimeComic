@@ -53,16 +53,12 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($sliders as $slider)
-                                            @php
-                                                $path = 'sliders/' . $slider->id . '/';
-                                                $slider->image = json_decode($slider->image);
-                                            @endphp
                                             <tr>
                                                 <td>{{ $slider->id }}</td>
                                                 <td>{{ $slider->title }}</td>
                                                 <td>{{ $slider->url }}</td>
                                                 <td>{{ $slider->description }}</td>
-                                                <td><img width="100px" src="{{asset($path . $slider->image)}}" alt=""></td>
+                                                <td><img width="100px" src="{{ $slider->image }}" alt=""></td>
                                                 <td>{{ $slider->priority }}</td>
                                                 <td>
                                                     @if ($slider->status == 'active')
@@ -76,11 +72,13 @@
                                                 <td>{{ $slider->created_at }}</td>
                                                 <td>{{ $slider->updated_at }}</td>
                                                 <td>
-                                                    <a title="Edit" href="{{ route('admin.slider.edit', ['slider' => $slider]) }}"
+                                                    <a title="Edit"
+                                                        href="{{ route('admin.slider.edit', ['slider' => $slider]) }}"
                                                         type="button" class="btn btn-round btn-warning"><i
                                                             class="fa fa-pen" aria-hidden="true"></i>
                                                     </a>
-                                                    <a title="Delete" href="{{ route('admin.slider.delete', ['slider' => $slider]) }}"
+                                                    <a title="Delete"
+                                                        href="{{ route('admin.slider.delete', ['slider' => $slider]) }}"
                                                         type="button" class="btn btn-round btn-danger"><i
                                                             class="fa fa-trash" aria-hidden="true"></i>
                                                     </a>

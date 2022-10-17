@@ -57,7 +57,7 @@ Route::domain('admin.' . env('APP_URL'))->group(function() {
             // Chapters
             Route::get('/{comic}/chapters', 'ChapterController@list')->name('admin.chapters.list');
             Route::get('/{comic}/chapters/add', 'ChapterController@add')->name('admin.chapter.add');
-            Route::post('/chapters/add', 'ChapterController@store')->name('admin.chapter.store');
+            Route::post('{comic}/chapters/store', 'ChapterController@store')->name('admin.chapter.store');
             Route::get('/{comic}/chapter/{chapterNumber}', 'ChapterController@preview')->where('chapterNumber', '[0-9]+')->name('admin.chapter.preview');
             Route::get('/chapter/delete/{chapter}', 'ChapterController@destroy')->name('admin.chapter.destroy');
         });

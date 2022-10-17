@@ -31,7 +31,7 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form enctype="multipart/form-data" method="POST" action="{{ route('admin.chapter.store') }}">
+                            <form enctype="multipart/form-data" method="POST" action="{{ route('admin.chapter.store', ['comic' => $comic]) }}">
                                 @csrf
                                 <div class="card-body" id="card-body">
                                     <div class="form-group">
@@ -67,7 +67,6 @@
                                             More</button>
                                     </div>
                                 </div>
-                                <input type="hidden" name="comic_id" value="{{ $comic->id }}">
                                 <input type="hidden" name="chapter_number" value="{{$chapter_number}}">
                                 <!-- /.card-body -->
                                 <div class="card-footer">
