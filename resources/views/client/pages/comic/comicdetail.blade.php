@@ -1,9 +1,9 @@
 <div class="anime__details__content">
     <div class="row">
         <div class="col-lg-3">
-            <div class="anime__details__pic set-bg" data-setbg="{{ asset('client/img/anime/details-pic.jpg') }}">
-                <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                <div class="view"><i class="fa fa-eye"></i> 9141</div>
+            <div class="anime__details__pic set-bg" data-setbg="{{ $comic->image }}">
+                <div class="comment"><i class="fa fa-comments"></i> {{ $comic->totalComment }}</div>
+                <div class="view"><i class="fa fa-eye"></i> {{ $comic->totalView }}</div>
             </div>
         </div>
         <div class="col-lg-9">
@@ -28,6 +28,7 @@
                             <ul>
                                 <li><span>Time Created:</span> {{$comic->created_at}}</li>
                                 <li><span>Views:</span> {{$comic->totalView}}</li>
+                                <li><span>Comments:</span> {{$comic->totalComment}}</li>
                             </ul>
                         </div>
                     </div>

@@ -27,7 +27,7 @@ class Category extends Model
     // Overide lại nếu cần sử dụng Binding Route Model
     public function getRouteKeyName()
     {
-        return parent::getRouteKeyName();
+        return 'slug';
     }
 
     public function getCreatedAtAttribute($value)
@@ -41,7 +41,6 @@ class Category extends Model
     }
 
     // Client
-    
     public function scopeStatusActive($query)
     {
         return $query->where('status', '=', 'active');

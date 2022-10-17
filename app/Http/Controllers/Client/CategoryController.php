@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\ClientModel\CategoryModel;
-use App\ClientModel\ComicModel;
+use App\Model\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,7 +15,7 @@ class CategoryController extends ClientController
         return "show list category";
     }
 
-    public function showListComic(CategoryModel $category)
+    public function showListComic(Category $category)
     {
         $comics = $category->comics;
         return view($this->_pathView . 'listcomic', [

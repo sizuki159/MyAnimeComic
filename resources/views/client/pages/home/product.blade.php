@@ -15,13 +15,13 @@
         @foreach ($comics as $comic)
             <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="{{ asset('comics/' . $comic->id . '/' . json_decode($comic->image)) }}">
-                        <div class="ep">2411</div>
-                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                    <div class="product__item__pic set-bg" data-setbg="{{ $comic->image }}">
+                        <div class="ep">{{ $comic->totalChapter }} Chapter</div>
+                        <div class="comment"><i class="fa fa-comments"></i> {{ $comic->totalComment }}</div>
+                        <div class="view"><i class="fa fa-eye"></i> {{ $comic->totalView }}</div>
                     </div>
                     <div class="product__item__text">
-                        <h5><a href="#">{{$comic->title}}</a></h5>
+                        <h5><a href="{{ route('client.comic.detail', ['category' => $comic->category, 'comic' => $comic]) }}">{{$comic->title}}</a></h5>
                     </div>
                 </div>
             </div>
@@ -31,5 +31,4 @@
 
 
 @section('append_script')
-    <script></script>
 @endsection

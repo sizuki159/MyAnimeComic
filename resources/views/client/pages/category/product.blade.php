@@ -19,22 +19,23 @@
         </div>
     </div>
     <div class="row">
-        {{$comics}}
-        <div class="col-lg-4 col-md-6 col-sm-6">
-            <div class="product__item">
-                <div class="product__item__pic set-bg" data-setbg="{{asset('client/img/popular/popular-1.jpg')}}">
-                    <div class="ep">18 / 18</div>
-                    <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                </div>
-                <div class="product__item__text">
-                    <ul>
-                        <li>Active</li>
-                        <li>Movie</li>
-                    </ul>
-                    <h5><a href="#">Sen to Chihiro no Kamikakushi</a></h5>
+        @foreach ($comics as $comic)
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="product__item">
+                    <div class="product__item__pic set-bg" data-setbg="{{ $comic->image }}">
+                        <div class="ep">{{ $comic->totalChapter }} Chapter</div>
+                        <div class="comment"><i class="fa fa-comments"></i> {{ $comic->totalComment }}</div>
+                        <div class="view"><i class="fa fa-eye"></i> {{ $comic->totalView }}</div>
+                    </div>
+                    <div class="product__item__text">
+                        <ul>
+                            <li>Active</li>
+                            <li>Movie</li>
+                        </ul>
+                        <h5><a href="{{ route('client.comic.detail', ['category' => $comic->category, 'comic' => $comic]) }}">{{ $comic->title }}</a></h5>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endforeach
     </div>
 </div>

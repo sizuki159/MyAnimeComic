@@ -10,9 +10,31 @@ class Chapter extends Model
 {
     protected $fillable = ['name', 'chapter_number', 'comic_id', 'source', 'status'];
 
+    public static function boot()
+    {
+        parent::boot();
+        static::deleting(function($chapter) {
+            Storage::disk('do_spaces')->deleteDirectory($chapter->comic_id . '/chapters/' . $chapter->chapter_number);
+        });
+    }
+    
+    #region Relationship
     public function comic()
     {
-        return $this->belongsTo('App\Model\Comic', 'comic_id');
+        return $this->belongsTo(Comic::class, 'comic_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'chapter_id');
+    }
+    #endregion
+
+    #region Attributes
+
+    public function getTotalCommentAttribute()
+    {
+        return $this->comments->count();
     }
 
     public function getCreatedAtAttribute($value)
@@ -24,12 +46,5 @@ class Chapter extends Model
     {
         return Carbon::parse($value)->diffForHumans();
     }
-
-    public static function boot()
-    {
-        parent::boot();
-        static::deleting(function($chapter) {
-            Storage::disk('do_spaces')->deleteDirectory($chapter->comic_id . '/chapters/' . $chapter->chapter_number);
-        });
-    }
+    #endregion
 }

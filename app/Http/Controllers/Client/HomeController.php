@@ -14,7 +14,7 @@ class HomeController extends ClientController
 
     public function index()
     {
-        $comics = DB::table('comics')->where('status', '=', 'active')->get();
+        $comics = Comic::where('status', 'active')->get();
         return view($this->_pathView . 'index', [
             'comics' => $comics
         ]);

@@ -11,28 +11,24 @@ class Comic extends Model
 {
     protected $fillable = ['title', 'image', 'author', 'description', 'status', 'category_id'];
 
-    public static function boot()
+    #region Attributes
+    public function getTotalViewAttribute()
     {
-        parent::boot();
-
-        static::creating(function($comic){
-            $comic->slug = Str::slug($comic->title);
-        });
-
-        static::deleting(function($comic) {
-            Storage::disk('do_spaces')->deleteDirectory($comic->id);
-        });
-        
+        return $this->chapters->sum('total_view');
     }
 
-    public function category()
+    public function getTotalChapterAttribute()
     {
-        return $this->belongsTo('App\Model\Category', 'category_id');
+        return $this->chapters->count();
     }
 
-    public function chapters()
+    public function getTotalCommentAttribute()
     {
-        return $this->hasMany('App\Model\Chapter', 'comic_id');
+        $totalComment = 0;
+        $this->chapters->each(function ($chapter) use ($totalComment) {
+            $totalComment += $chapter->totalComment;
+        });
+        return $totalComment;
     }
 
     public function getCreatedAtAttribute($value)
@@ -44,4 +40,37 @@ class Comic extends Model
     {
         return Carbon::parse($value)->diffForHumans();
     }
+
+    #endregion
+
+    // Overide lại nếu cần sử dụng Binding Route Model
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($comic) {
+            $comic->slug = Str::slug($comic->title);
+        });
+
+        static::deleting(function ($comic) {
+            Storage::disk('do_spaces')->deleteDirectory($comic->id);
+        });
+    }
+
+    #region Relationship
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function chapters()
+    {
+        return $this->hasMany(Chapter::class, 'comic_id');
+    }
+    #endregion
 }
