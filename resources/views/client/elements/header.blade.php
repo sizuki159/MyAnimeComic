@@ -12,7 +12,7 @@
                 <nav class="header__menu mobile-menu">
                     <ul>
                         <li class="active"><a href="{{ route('client.home') }}">Homepage</a></li>
-                        <li><a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>
+                        <li><a href="#">Categories <span class="arrow_carrot-down"></span></a>
                             <ul class="dropdown">
                                 @foreach ($categories as $category)
                                     <li><a href="{{ route('client.category.showListComic', ['category' => $category]) }}">{{ $category->name }}</a></li>

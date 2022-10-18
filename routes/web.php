@@ -81,28 +81,32 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
 // Client
 Route::domain('client.' . env('APP_URL'))->group(function () {
 
+
+    Route::get('signin', 'Client\AuthController@signin')->name('client.signin');
+    Route::post('login', 'Client\AuthController@login')->name('client.login');
+
+    Route::get('signup', 'Client\AuthController@signup')->name('client.signup');
+    Route::post('register', 'Client\AuthController@register')->name('client.register');
+
+    Route::get('logout', 'Client\AuthController@logout')->name('client.logout');
+    
     Route::namespace('Client')->group(function () {
 
         // Trang chu
         Route::get('/', 'HomeController@index')->name('client.home');
 
         // Show all category active
-        Route::get('/category', 'CategoryController@list')->name('client.category');
+        Route::get('category', 'CategoryController@list')->name('client.category');
 
         // Show all comic of this category
-        Route::get('/{category}', 'CategoryController@showListComic')->name('client.category.showListComic');
+        Route::get('{category}', 'CategoryController@showListComic')->name('client.category.showListComic');
 
         // Show detail comic
-        Route::get('/{category}/{comic}', 'ComicController@detail')->name('client.comic.detail');
+        Route::get('{category}/{comic}', 'ComicController@detail')->name('client.comic.detail');
 
         // Read chapters of comic
-        Route::get('/{category}/{comic}/chapter/{chapterNumber}', 'ChapterController@read')->where('chapterNumber', '[0-9]+')->name('client.chapter.detail');
+        Route::get('{category}/{comic}/chapter/{chapterNumber}', 'ChapterController@read')->where('chapterNumber', '[0-9]+')->name('client.chapter.detail');
 
-        Route::get('/login', function () {
-            return view('client.pages.auth.login');
-        });
-        Route::get('/signup', function () {
-            return view('client.pages.auth.signup');
-        });
+
     });
 });
