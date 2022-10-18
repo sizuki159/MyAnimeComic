@@ -95,6 +95,9 @@ Route::domain('client.' . env('APP_URL'))->group(function () {
         // Show detail comic
         Route::get('/{category}/{comic}', 'ComicController@detail')->name('client.comic.detail');
 
+        // Read chapters of comic
+        Route::get('/{category}/{comic}/chapter/{chapterNumber}', 'ChapterController@read')->where('chapterNumber', '[0-9]+')->name('client.chapter.detail');
+
         Route::get('/login', function () {
             return view('client.pages.auth.login');
         });

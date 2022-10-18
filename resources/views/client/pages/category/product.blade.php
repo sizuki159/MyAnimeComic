@@ -23,7 +23,7 @@
             <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="product__item">
                     <div class="product__item__pic set-bg" data-setbg="{{ $comic->image }}">
-                        <div class="ep">{{ $comic->totalChapter }} Chapter</div>
+                        <div class="ep">{{ $comic->totalChapter }} / ?</div>
                         <div class="comment"><i class="fa fa-comments"></i> {{ $comic->totalComment }}</div>
                         <div class="view"><i class="fa fa-eye"></i> {{ $comic->totalView }}</div>
                     </div>
