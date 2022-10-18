@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-6">
                 <div class="section-title">
-                    <h4>Romance</h4>
+                    <h4>{{ $category->name }}</h4>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6">
@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="row">
-        @foreach ($comics as $comic)
+        @foreach ($category->comics as $comic)
             <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="product__item">
                     <div class="product__item__pic set-bg" data-setbg="{{ $comic->image }}">

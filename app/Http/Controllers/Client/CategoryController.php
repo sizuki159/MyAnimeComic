@@ -17,9 +17,8 @@ class CategoryController extends ClientController
 
     public function showListComic(Category $category)
     {
-        $comics = $category->comics;
         return view($this->_pathView . 'listcomic', [
-            'comics' => $comics
+            'category' => $category
         ]);
     }
 }
