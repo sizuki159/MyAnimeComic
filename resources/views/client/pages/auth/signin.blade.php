@@ -11,7 +11,7 @@
                 <div class="col-lg-6">
                     <div class="login__form">
                         <h3>Login</h3>
-                        <form method="POST" action="{{ route('client.login') }}">
+                        <form method="POST" action="{{ route('client.auth.login') }}">
                             @csrf
                             <div class="input__item">
                                 <input name="email" type="text" placeholder="Email address">

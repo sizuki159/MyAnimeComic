@@ -81,32 +81,28 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
 // Client
 Route::domain('client.' . env('APP_URL'))->group(function () {
 
-
-    Route::get('signin', 'Client\AuthController@signin')->name('client.signin');
-    Route::post('login', 'Client\AuthController@login')->name('client.login');
-
-    Route::get('signup', 'Client\AuthController@signup')->name('client.signup');
-    Route::post('register', 'Client\AuthController@register')->name('client.register');
-
-    Route::get('logout', 'Client\AuthController@logout')->name('client.logout');
-    
     Route::namespace('Client')->group(function () {
 
         // Trang chu
         Route::get('/', 'HomeController@index')->name('client.home');
 
+        // Authentication
+        Route::get('auth/signin', 'AuthController@signin')->name('client.auth.signin');
+        Route::post('auth/login', 'AuthController@login')->name('client.auth.login');
+        Route::get('auth/signup', 'AuthController@signup')->name('client.auth.signup');
+        Route::post('auth/register', 'AuthController@register')->name('client.auth.register');
+        Route::get('auth/logout', 'AuthController@logout')->name('client.auth.logout');
+
         // Show all category active
         Route::get('category', 'CategoryController@list')->name('client.category');
 
         // Show all comic of this category
-        Route::get('{category}', 'CategoryController@showListComic')->name('client.category.showListComic');
+        Route::get('category/{category}', 'CategoryController@showListComic')->name('client.category.showListComic');
 
         // Show detail comic
-        Route::get('{category}/{comic}', 'ComicController@detail')->name('client.comic.detail');
+        Route::get('category/{category}/{comic}', 'ComicController@detail')->name('client.comic.detail');
 
         // Read chapters of comic
-        Route::get('{category}/{comic}/chapter/{chapterNumber}', 'ChapterController@read')->where('chapterNumber', '[0-9]+')->name('client.chapter.detail');
-
-
+        Route::get('category/{category}/{comic}/chapter/{chapterNumber}', 'ChapterController@read')->where('chapterNumber', '[0-9]+')->name('client.chapter.detail');
     });
 });

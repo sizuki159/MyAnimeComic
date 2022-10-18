@@ -26,7 +26,13 @@
         <div class="col-lg-2">
             <div class="header__right">
                 <a href="#" class="search-switch"><span class="icon_search"></span></a>
-                <a href="./login.html"><span class="icon_profile"></span></a>
+                @guest
+                <a href="{{ route('client.auth.signin') }}"><span class="icon_profile"></span></a>
+                @endguest
+
+                @auth
+                <a href="{{ route('client.auth.logout') }}"><span class="icon_profile"></span></a>
+                @endauth
             </div>
         </div>
     </div>

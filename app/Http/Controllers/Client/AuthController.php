@@ -27,7 +27,7 @@ class AuthController extends ClientController
         if (Auth::attempt($credentials)) {
             return redirect(route('client.home'));
         }
-        return redirect(route('client.signin'))->withErrors('login fail');
+        return redirect(route('client.auth.signin'))->withErrors('login fail');
     }
 
     public function signup()
@@ -61,6 +61,6 @@ class AuthController extends ClientController
     {
         Session::flush();
         Auth::logout();
-        return redirect(route('client.signin'));
+        return redirect(route('client.auth.signin'));
     }
 }
