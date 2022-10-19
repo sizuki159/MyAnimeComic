@@ -25,7 +25,7 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:\App\Model\Category,name',
+            'name' => 'required|unique:\App\Models\Category,name',
             'status' => ['required', Rule::in(['active', 'disabled'])],
         ];
     }

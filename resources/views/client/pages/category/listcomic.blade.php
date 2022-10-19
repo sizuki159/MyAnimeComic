@@ -2,6 +2,10 @@
 
 @section('content')
 
+
+
+{{Breadcrumbs::render('category')}}
+
     <!-- Product Section Begin -->
     <section class="product spad">
         <div class="container">

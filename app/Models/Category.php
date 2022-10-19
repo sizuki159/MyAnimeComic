@@ -8,11 +8,13 @@ use Illuminate\Support\Str;
 
 class Category extends Model
 {
+    protected $table = "categories";
+    
     protected $fillable = ['name', 'status'];
 
     public function comics()
     {
-        return $this->hasMany('App\Model\Comic', 'category_id');
+        return $this->hasMany(Comic::class, 'category_id');
     }
 
     // Overide boot , ví dụ trước khi create thì làm gì
