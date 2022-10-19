@@ -32,6 +32,11 @@ class Chapter extends Model
 
     #region Attributes
 
+    public function getListCommentsAttribute()
+    {
+        return $this->comments;
+    }
+
     public function getTotalCommentAttribute()
     {
         return $this->comments->count();

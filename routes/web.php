@@ -87,22 +87,27 @@ Route::domain('client.' . env('APP_URL'))->group(function () {
         Route::get('/', 'HomeController@index')->name('client.home');
 
         // Authentication
-        Route::get('auth/signin', 'AuthController@signin')->name('client.auth.signin');
-        Route::post('auth/login', 'AuthController@login')->name('client.auth.login');
-        Route::get('auth/signup', 'AuthController@signup')->name('client.auth.signup');
-        Route::post('auth/register', 'AuthController@register')->name('client.auth.register');
-        Route::get('auth/logout', 'AuthController@logout')->name('client.auth.logout');
+        Route::prefix('auth')->group(function() {
+            Route::get('signin', 'AuthController@signin')->name('client.auth.signin');
+            Route::post('login', 'AuthController@login')->name('client.auth.login');
+            Route::get('signup', 'AuthController@signup')->name('client.auth.signup');
+            Route::post('register', 'AuthController@register')->name('client.auth.register');
+            Route::get('logout', 'AuthController@logout')->name('client.auth.logout');
+        });
 
-        // Show all category active
-        Route::get('category', 'CategoryController@list')->name('client.category');
+        Route::prefix('category')->group(function() {
+            // Show all category active
+            Route::get('/', 'CategoryController@list')->name('client.category');
+            // Show all comic of this category
+            Route::get('{category}', 'CategoryController@showListComic')->name('client.category.showListComic');
+            // Show detail comic
+            Route::get('{category}/{comic}', 'ComicController@detail')->name('client.comic.detail');
+            // Read chapters of comic
+            Route::get('{category}/{comic}/chapter/{chapterNumber}', 'ChapterController@read')->where('chapterNumber', '[0-9]+')->name('client.chapter.detail');
+        });
 
-        // Show all comic of this category
-        Route::get('category/{category}', 'CategoryController@showListComic')->name('client.category.showListComic');
-
-        // Show detail comic
-        Route::get('category/{category}/{comic}', 'ComicController@detail')->name('client.comic.detail');
-
-        // Read chapters of comic
-        Route::get('category/{category}/{comic}/chapter/{chapterNumber}', 'ChapterController@read')->where('chapterNumber', '[0-9]+')->name('client.chapter.detail');
+        Route::prefix('comment')->group(function() {
+            Route::get('{chapter}');
+        });
     });
 });

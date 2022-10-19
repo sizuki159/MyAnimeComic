@@ -33,7 +33,6 @@ class ComicController extends Controller
     public function store(MainRequest $request)
     {
         $comic = MainModel::create($request->except('image'));
-
         // Upload Image
         if ($request->hasFile('image')) {
             $file = $request->file('image');
