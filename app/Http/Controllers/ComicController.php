@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ComicRequest as MainRequest;
-use App\Model\Category;
-use App\Model\Comic as MainModel;
-use App\Model\Comic;
+use App\Models\Category;
+use App\Models\Comic as MainModel;
+use App\Models\Comic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 

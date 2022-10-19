@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Model\Category;
-use App\Model\Chapter;
-use App\Model\Comic;
+use App\Models\Category;
+use App\Models\Chapter;
+use App\Models\Comic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

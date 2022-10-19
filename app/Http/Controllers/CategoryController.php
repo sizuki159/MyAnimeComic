@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest as MainRequest;
-use App\Model\Category as MainModel;
-use App\Model\Category;
-use App\Model\Comic;
+use App\Models\Category as MainModel;
+use App\Models\Category;
+use App\Models\Comic;
 use Composer\Util\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;

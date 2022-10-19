@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest as MainRequest;
-use App\Model\Category as MainModel;
+use App\Models\Category as MainModel;
 use Composer\Util\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;

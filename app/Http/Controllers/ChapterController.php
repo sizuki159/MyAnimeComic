@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Chapter;
-use App\Model\Comic;
+use App\Models\Chapter;
+use App\Models\Comic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;

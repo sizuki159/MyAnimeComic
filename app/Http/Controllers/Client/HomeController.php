@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
-use App\Model\Category;
-use App\Model\Comic;
-use App\Model\Slider;
+use App\Models\Category;
+use App\Models\Comic;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

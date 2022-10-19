@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\Slider as MainModel;
+use App\Models\Slider as MainModel;
 use App\Http\Requests\SliderRequest as MainRequest;
-use App\Model\Slider;
+use App\Models\Slider;
 use JsonSchema\Uri\Retrievers\FileGetContents;
 
 class SliderController extends Controller

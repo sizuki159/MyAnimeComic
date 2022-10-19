@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Model\Category;
+use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
