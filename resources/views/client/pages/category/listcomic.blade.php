@@ -2,9 +2,7 @@
 
 @section('content')
 
-
-
-{{Breadcrumbs::render('category')}}
+    {{Breadcrumbs::render('category')}}
 
     <!-- Product Section Begin -->
     <section class="product spad">
