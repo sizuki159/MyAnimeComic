@@ -1,8 +1,9 @@
 @extends('client.main')
 @section('content')
     <!-- Breadcrumb Begin -->
-    @include('client.pages.comic.breadcrumb')
+    {{Breadcrumbs::render('category.comic.chapter', $chapter)}}
     <!-- Breadcrumb End -->
+    
     <section class="anime-details spad">
         <div class="container">
             <div class="row">

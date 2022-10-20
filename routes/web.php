@@ -92,16 +92,16 @@ Route::domain('client.' . env('APP_URL'))->group(function () {
 
         // Authentication
         Route::prefix('auth')->group(function() {
-            Route::get('signin', 'AuthController@signin')->name('client.auth.signin');
-            Route::post('login', 'AuthController@login')->name('client.auth.login');
-            Route::get('signup', 'AuthController@signup')->name('client.auth.signup');
-            Route::post('register', 'AuthController@register')->name('client.auth.register');
-            Route::get('logout', 'AuthController@logout')->name('client.auth.logout');
+            Route::get('signin', 'AuthController@signin')->middleware('guest')->name('client.auth.signin');
+            Route::post('login', 'AuthController@login')->middleware('guest')->name('client.auth.login');
+            Route::get('signup', 'AuthController@signup')->middleware('guest')->name('client.auth.signup');
+            Route::post('register', 'AuthController@register')->middleware('guest')->name('client.auth.register');
+            Route::get('logout', 'AuthController@logout')->middleware('auth')->name('client.auth.logout');
 
             // Client Profile
             Route::get('profile', function () {
                 // Only verified users may enter...
-            })->middleware('verified');
+            })->middleware(['auth', 'verified']);
         });
 
         Route::prefix('category')->group(function() {
