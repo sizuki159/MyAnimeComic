@@ -25,10 +25,10 @@ class CreateRolesTable extends Migration
         });
 
         Role::firstOrCreate([
-            'name' => 'admin'
+            'name' => 'Admin'
         ]);
         Role::create([
-            'name' => 'client'
+            'name' => 'Client'
         ]);
     }
 

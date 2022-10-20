@@ -115,6 +115,8 @@ Route::domain('client.' . env('APP_URL'))->group(function () {
             Route::get('{category}/{comic}/chapter/{chapterNumber}', 'ChapterController@read')->where('chapterNumber', '[0-9]+')->name('client.chapter.detail');
         });
 
+        Route::get('favorite/{comic}', 'FavoriteController@toggle')->name('client.favorite');
+
         Route::prefix('comment')->group(function() {
             Route::get('{chapter}');
         });

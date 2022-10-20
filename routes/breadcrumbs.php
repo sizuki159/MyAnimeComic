@@ -18,15 +18,15 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
 });
 
 // Home > Category
-Breadcrumbs::for('category', function (BreadcrumbTrail $trail) {
-    $trail->parent('home');
-    $trail->push('Category', route('client.category'));
-});
+// Breadcrumbs::for('category', function (BreadcrumbTrail $trail) {
+//     $trail->parent('home');
+//     $trail->push('Category', route('client.category'));
+// });
 
 
 // Home > Category > [Category]
 Breadcrumbs::for('category.listcomic', function (BreadcrumbTrail $trail, Category $category) {
-    $trail->parent('category');
+    $trail->parent('home');
     $trail->push($category->name, route('client.category.showListComic', ['category' => $category]));
 });
 
