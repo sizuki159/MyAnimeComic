@@ -25,11 +25,11 @@
             </div>
 
 
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-lg-8">
                     @include('client.pages.chapter.comment')
                 </div>
-            </div>
+            </div> --}}
         </div>
     </section>
 @endsection

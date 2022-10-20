@@ -23,24 +23,9 @@ class Chapter extends Model
     {
         return $this->belongsTo(Comic::class, 'comic_id');
     }
-
-    public function comments()
-    {
-        return $this->hasMany(Comment::class, 'chapter_id');
-    }
     #endregion
 
     #region Attributes
-
-    public function getListCommentsAttribute()
-    {
-        return $this->comments;
-    }
-
-    public function getTotalCommentAttribute()
-    {
-        return $this->comments->count();
-    }
 
     public function getCreatedAtAttribute($value)
     {

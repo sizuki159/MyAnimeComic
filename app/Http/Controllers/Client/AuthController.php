@@ -47,7 +47,10 @@ class AuthController extends ClientController
         ]);
 
         $this->create($request->all());
-
+        Auth::attempt([
+            'email' => $request->email,
+            'password' => $request->password
+        ]);
         return redirect()->back();
     }
 

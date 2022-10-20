@@ -118,7 +118,7 @@ Route::domain('client.' . env('APP_URL'))->group(function () {
         Route::get('favorite/{comic}', 'FavoriteController@toggle')->name('client.favorite');
 
         Route::prefix('comment')->group(function() {
-            Route::get('{chapter}');
+            Route::post('{comic}', 'CommentController@store')->name('client.comment.store');
         });
     });
 });

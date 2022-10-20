@@ -16,11 +16,11 @@ class CreateCommentsTable extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('chapter_id');
-            $table->text('comment');
-            $table->string('status');
+            $table->unsignedBigInteger('comic_id');
+            $table->text('content');
+            $table->string('status')->default('active');
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->foreign('chapter_id')->references('id')->on('chapters')->cascadeOnDelete();
+            $table->foreign('comic_id')->references('id')->on('comics')->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -18,8 +18,21 @@ class ComicController extends ClientController
     public function detail(Category $category, Comic $comic)
     {
         if ($comic->category->is($category)) {
-            $comments = Comment::whereIn('chapter_id', $comic->chapters)->get();
             
+            // Get list comments on this comic
+            $comments = DB::table('users')
+            ->select([
+                'users.name',
+                'comments.content',
+                'comments.created_at'
+            ])
+            ->join('comments', 'comments.user_id', '=', 'users.id')
+            ->where('comments.status', '=', 'active')
+            ->where('comments.comic_id', '=', $comic->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+            // User favorites 
             $favorite = false;
             if(Auth::check()) {
                 $favorite = Favorite::where([

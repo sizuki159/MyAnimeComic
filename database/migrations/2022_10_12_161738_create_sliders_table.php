@@ -30,7 +30,7 @@ class CreateSlidersTable extends Migration
         DB::table('sliders')->insert([
             'title' => 'Detective Conan: Halloween Bride 2022',
             'description' => 'During the wedding of Takagi and Sato, an assailant breaks and tries to attack Sato...',
-            'image' => "data:image/png;base64," . base64_encode(file_get_contents(asset('images/slider/conan.jpg'))),
+            'image' => "data:image/png;base64," . base64_encode(file_get_contents(public_path('images/slider/conan.jpg'))),
             'url' => '#',
             'priority' => '1',
             'status' => 'active',
@@ -41,7 +41,7 @@ class CreateSlidersTable extends Migration
         DB::table('sliders')->insert([
             'title' => 'Fate / Stay Night: Unlimited Blade Works',
             'description' => 'After 30 days of travel across the world...',
-            'image' => "data:image/png;base64," . base64_encode(file_get_contents(asset('images/slider/hero-1.jpg'))),
+            'image' => "data:image/png;base64," . base64_encode(file_get_contents(public_path('images/slider/hero-1.jpg'))),
             'url' => '#',
             'priority' => '2',
             'status' => 'active',

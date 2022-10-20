@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    protected $fillable = ['user_id', 'chapter_id', 'comment', 'status'];
+    protected $fillable = ['user_id', 'comic_id', 'content', 'status'];
 
-    public function chapter()
+    public function comic()
     {
-        return $this->belongsTo(Chapter::class, 'chapter_id');
+        return $this->belongsTo(Comic::class, 'comic_id');
     }
 
     public function user()

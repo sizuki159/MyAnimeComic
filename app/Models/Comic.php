@@ -22,13 +22,14 @@ class Comic extends Model
         return $this->chapters->count();
     }
 
+    public function getListCommentsAttribute()
+    {
+        return $this->comments;
+    }
+
     public function getTotalCommentAttribute()
     {
-        $totalComment = 0;
-        $this->chapters->each(function ($chapter) use ($totalComment) {
-            $totalComment += $chapter->totalComment;
-        });
-        return $totalComment;
+        return $this->comments->count();
     }
 
     public function getCreatedAtAttribute($value)
@@ -71,6 +72,10 @@ class Comic extends Model
     public function chapters()
     {
         return $this->hasMany(Chapter::class, 'comic_id');
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'comic_id');
     }
     #endregion
 }
