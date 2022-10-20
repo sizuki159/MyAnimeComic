@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+
+use function React\Promise\reduce;
 
 class AuthController extends ClientController
 {
@@ -19,8 +22,8 @@ class AuthController extends ClientController
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required',
-            'password' => 'required',
+            'email' => 'required|email|max:255',
+            'password' => 'required|min:6'
         ]);
 
         $credentials = $request->only('email', 'password');
@@ -40,10 +43,10 @@ class AuthController extends ClientController
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
+            'password' => 'required|min:6|confirmed',
         ]);
 
-        $check = $this->create($request->all());
+        $this->create($request->all());
 
         return redirect()->back();
     }

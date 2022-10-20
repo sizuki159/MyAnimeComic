@@ -1,6 +1,7 @@
 <?php
 
 use Composer\Util\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Expr\FuncCall;
 
@@ -78,8 +79,11 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
     //});
 });
 
+Auth::routes(['verify' => true]);
+
 // Client
 Route::domain('client.' . env('APP_URL'))->group(function () {
+
 
     Route::namespace('Client')->group(function () {
 
@@ -93,6 +97,11 @@ Route::domain('client.' . env('APP_URL'))->group(function () {
             Route::get('signup', 'AuthController@signup')->name('client.auth.signup');
             Route::post('register', 'AuthController@register')->name('client.auth.register');
             Route::get('logout', 'AuthController@logout')->name('client.auth.logout');
+
+            // Client Profile
+            Route::get('profile', function () {
+                // Only verified users may enter...
+            })->middleware('verified');
         });
 
         Route::prefix('category')->group(function() {

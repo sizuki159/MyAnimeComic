@@ -14,12 +14,14 @@
                         <form method="POST" action="{{ route('client.auth.login') }}">
                             @csrf
                             <div class="input__item">
-                                <input name="email" type="text" placeholder="Email address">
+                                <input value="{{old('email')}}" name="email" type="text" placeholder="Email address">
                                 <span class="icon_mail"></span>
+                                <p class="text-danger">{{ $errors->first('email') }}</p>
                             </div>
                             <div class="input__item">
                                 <input name="password" type="password" placeholder="Password">
                                 <span class="icon_lock"></span>
+                                <p class="text-danger">{{ $errors->first('password') }}</p>
                             </div>
                             <button type="submit" class="site-btn">Login Now</button>
                         </form>
@@ -29,7 +31,7 @@
                 <div class="col-lg-6">
                     <div class="login__register">
                         <h3>Dont’t Have An Account?</h3>
-                        <a href="#" class="primary-btn">Register Now</a>
+                        <a href="{{ route('client.auth.signup') }}" class="primary-btn">Register Now</a>
                     </div>
                 </div>
             </div>
