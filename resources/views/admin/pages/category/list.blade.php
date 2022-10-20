@@ -80,6 +80,9 @@
                                 </table>
                             </div>
                             <!-- /.card-body -->
+                            <div class="card-footer">
+                                {{ $categories->links() }}
+                            </div>
                         </div>
                         <!-- /.card -->
                     </div>
