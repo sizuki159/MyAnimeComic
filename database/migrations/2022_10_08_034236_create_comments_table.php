@@ -17,7 +17,7 @@ class CreateCommentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('comic_id');
-            $table->string('content', 65535);
+            $table->string('content', 16383);
             $table->string('status')->default('active');
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreign('comic_id')->references('id')->on('comics')->cascadeOnDelete();

@@ -15,11 +15,11 @@ class CreateComicsTable extends Migration
     {
         Schema::create('comics', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 65535)->unique();
-            $table->string('slug', 65535)->unique();
-            $table->string('image', 65535)->nullable();
+            $table->string('title', 16383)->unique();
+            $table->string('slug', 16383)->unique();
+            $table->string('image', 16383)->nullable();
             $table->string('author')->nullable();
-            $table->string('description', 65535)->nullable();
+            $table->string('description', 16383)->nullable();
             $table->string('status');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();

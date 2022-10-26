@@ -15,12 +15,12 @@ class CreateChaptersTable extends Migration
     {
         Schema::create('chapters', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 65535);
+            $table->string('name', 16383);
             $table->unsignedInteger('chapter_number');
             $table->unsignedBigInteger('comic_id');
             $table->foreign('comic_id')->references('id')->on('comics')->cascadeOnDelete();
             $table->unsignedBigInteger('total_view')->default(0);
-            $table->string('source', 65535);
+            $table->string('source', 16383);
             $table->string('status');
             $table->timestamps();
         });
