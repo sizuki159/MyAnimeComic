@@ -19,7 +19,7 @@ class CreateSlidersTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->longText('image')->default('');
-            $table->text('url');
+            $table->string('url');
             $table->unsignedInteger('priority')->default(0);
             $table->string('status');
             $table->timestamps();
