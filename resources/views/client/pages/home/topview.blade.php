@@ -46,57 +46,17 @@
         <div class="section-title">
             <h5>New Comment</h5>
         </div>
+        @foreach ($comicRecentComments as $comicRecentComment)
         <div class="product__sidebar__comment__item">
             <div class="product__sidebar__comment__item__pic">
-                <img src="{{ asset('client/img/sidebar/comment-1.jpg') }}" alt="">
+                <img width="90px" height="130px" src="{{ $comicRecentComment->image }}" alt="">
             </div>
             <div class="product__sidebar__comment__item__text">
-                <ul>
-                    <li>Active</li>
-                    <li>Movie</li>
-                </ul>
-                <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
+                <h5><a href="{{ route('client.comic.detail', ['category' => $comicRecentComment->category, 'comic' => $comicRecentComment]) }}">{{ $comicRecentComment->title }}</a></h5>
+                <span><i class="fa fa-eye"></i> {{ $comicRecentComment->totalView }} Viewes</span>
+                <div class="comment"><i class="fa fa-comments"></i> {{ $comicRecentComment->totalComment }}</div>
             </div>
-        </div>
-        <div class="product__sidebar__comment__item">
-            <div class="product__sidebar__comment__item__pic">
-                <img src="{{ asset('client/img/sidebar/comment-2.jpg') }}" alt="">
-            </div>
-            <div class="product__sidebar__comment__item__text">
-                <ul>
-                    <li>Active</li>
-                    <li>Movie</li>
-                </ul>
-                <h5><a href="#">Shirogane Tamashii hen Kouhan sen</a></h5>
-                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-            </div>
-        </div>
-        <div class="product__sidebar__comment__item">
-            <div class="product__sidebar__comment__item__pic">
-                <img src="{{ asset('client/img/sidebar/comment-3.jpg') }}" alt="">
-            </div>
-            <div class="product__sidebar__comment__item__text">
-                <ul>
-                    <li>Active</li>
-                    <li>Movie</li>
-                </ul>
-                <h5><a href="#">Kizumonogatari III: Reiket su-hen</a></h5>
-                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-            </div>
-        </div>
-        <div class="product__sidebar__comment__item">
-            <div class="product__sidebar__comment__item__pic">
-                <img src="{{ asset('client/img/sidebar/comment-4.jpg') }}" alt="">
-            </div>
-            <div class="product__sidebar__comment__item__text">
-                <ul>
-                    <li>Active</li>
-                    <li>Movie</li>
-                </ul>
-                <h5><a href="#">Monogatari Series: Second Season</a></h5>
-                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-            </div>
-        </div>
+        </div>  
+        @endforeach
     </div>
 </div>

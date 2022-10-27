@@ -11,6 +11,10 @@ use Illuminate\Validation\Rule;
 
 use App\Http\Controllers\Controller;
 
+
+use App\Http\Resources\Category as CategoryRS;
+use App\Http\Resources\CategoryCollection;
+
 class CategoryController extends Controller
 {
     /**
@@ -22,7 +26,7 @@ class CategoryController extends Controller
     {
         // Xem thêm document tại https://laravel.com/docs/7.x/eloquent#collections
         return Category::where('status', 'active')
-                        ->orderBy('created_at', 'asc')
+                        ->orderBy('id', 'asc')
                         ->get();
     }
 
@@ -53,10 +57,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        if($category->id == null)
-            return Response('', Response::HTTP_NOT_FOUND);
-        dd($category);
-        //return $category;
+        return new CategoryCollection($category->comics);
+        return new CategoryRS($category);
     }
 
     /**

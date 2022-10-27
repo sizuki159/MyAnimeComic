@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::apiResource('/categories', 'Backend\CategoryController');
+Route::apiResource('/categories', 'API\CategoryController');
+Route::apiResource('/comic', 'API\CategoryController');
 
 // Route::post('/register', 'Auth\RegisterController@register');
 // Route::post('/login', 'Auth\LoginController@login');
