@@ -55,9 +55,10 @@ class ChapterController extends Controller
 
         $data = [];
         if ($request->hasFile('image')) {
-            $image_number = 1;
+            //$image_number = 1;
             foreach ($request->file('image') as $file) {
-                $name = $image_number++ . '.' . $file->getClientOriginalExtension();
+                //$name = $image_number++ . '.' . $file->getClientOriginalExtension();
+                $name = $file->getClientOriginalName();
                 $path = $comic->id . '/chapters/' . $request->chapter_number;
                 Storage::disk('do_spaces')->putFileAs($path, $file, $name, 'public');
                 $data[] = Storage::disk('do_spaces')->url($path . '/' . $name);

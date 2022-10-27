@@ -54,7 +54,7 @@
                                         <label>File input</label>
                                         <div class="input-group">
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" name="image[]">
+                                                <input type="file" class="custom-file-input" name="image[]" multiple="multiple">
                                                 <label class="custom-file-label">Choose file</label>
                                             </div>
                                         </div>
@@ -98,7 +98,7 @@
                 <label>File input</label>
                 <div class="input-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="image[]">
+                        <input type="file" class="custom-file-input" name="image[]" multiple="multiple">
                         <label class="custom-file-label">Choose file</label>
                     </div>
                     <div class="input-group-append">
