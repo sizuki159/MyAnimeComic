@@ -23,6 +23,10 @@ class Chapter extends Model
     {
         return $this->belongsTo(Comic::class, 'comic_id');
     }
+    public function viewstatistics()
+    {
+        return $this->hasMany(ViewStatistic::class, 'chapter_id');
+    }
     #endregion
 
     #region Attributes
