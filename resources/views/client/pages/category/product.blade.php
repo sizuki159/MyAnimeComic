@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="row">
-        @foreach ($category->comics as $comic)
+        @foreach ($comicOfCategory as $comic)
             <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="product__item">
                     <div class="product__item__pic set-bg" data-setbg="{{ $comic->image }}">
@@ -39,3 +39,4 @@
         @endforeach
     </div>
 </div>
+{{ $comicOfCategory->links('client.pages.category.product_pagination') }}
