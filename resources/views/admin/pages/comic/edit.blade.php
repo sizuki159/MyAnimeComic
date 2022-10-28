@@ -49,6 +49,12 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label for="description">Description</label>
+                                        <p class="text-danger">{{ $errors->first('description') }}</p>
+                                        <input value="{{$comic->description}}" type="text" class="form-control" name="description" id="description"
+                                            placeholder="Enter Description">
+                                    </div>
+                                    <div class="form-group">
                                         <label for="author">Author</label>
                                         <p class="text-danger">{{ $errors->first('author') }}</p>
                                         <input value="{{$comic->author}}" type="text" class="form-control" name="author" id="author"

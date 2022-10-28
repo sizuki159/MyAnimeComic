@@ -15,7 +15,7 @@ class ComicController extends Controller
 
     public function index()
     {
-        $comics = MainModel::all();
+        $comics = MainModel::paginate(10);
 
         return view($this->_view . 'list', [
             'comics' => $comics

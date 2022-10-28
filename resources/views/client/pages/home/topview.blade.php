@@ -54,7 +54,7 @@
             <div class="product__sidebar__comment__item__text">
                 <h5><a href="{{ route('client.comic.detail', ['category' => $comicRecentComment->category, 'comic' => $comicRecentComment]) }}">{{ $comicRecentComment->title }}</a></h5>
                 <span><i class="fa fa-eye"></i> {{ $comicRecentComment->totalView }} Viewes</span>
-                <div class="comment"><i class="fa fa-comments"></i> {{ $comicRecentComment->totalComment }}</div>
+                <span><i class="fa fa-comments"></i> {{ $comicRecentComment->totalComment }}</span>
             </div>
         </div>  
         @endforeach
