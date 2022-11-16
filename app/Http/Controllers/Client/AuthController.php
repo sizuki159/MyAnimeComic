@@ -28,9 +28,9 @@ class AuthController extends ClientController
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect(route('client.home'));
+            return redirect()->intended(route('client.home'));
         }
-        return redirect(route('client.auth.signin'))->withErrors('login fail');
+        return redirect()->back()->withInput()->withFlashMessage('login fail');
     }
 
     public function signup()

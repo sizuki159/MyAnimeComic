@@ -1184,6 +1184,8 @@ ol {
 
 .anime__video__player {
 	margin-bottom: 70px;
+	display: flex;
+	justify-content: center;
 }
 
 .anime__video__player .plyr--video {

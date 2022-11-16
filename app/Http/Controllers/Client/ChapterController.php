@@ -32,7 +32,8 @@ class ChapterController extends ClientController
             $chapter->source = json_decode($chapter->source);
             return view($this->_pathView . 'index', [
                 'comic' => $comic,
-                'chapter' => $chapter
+                'chapter' => $chapter,
+                'chapterNumber' => $chapterNumber
             ]);
         }
         return redirect(route('client.home'));
