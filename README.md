@@ -1,4 +1,4 @@
-# Tìm hiểu Amazon Polly và viết ứng dụng minh họa đơn giản
+# Đồ án công nghệ thông tin
 
 ## Các thành viên trong nhóm
 * Nguyễn Thành Trung – 19110304
