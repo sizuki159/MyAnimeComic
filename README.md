@@ -1,5 +1,8 @@
 # Đồ án công nghệ thông tin
 
+## File báo cáo
+* File báo cáo: https://drive.google.com/drive/folders/1BWNdRTBv1HQQIbdbpD7Q_dgY1P1NC_bl?usp=sharing
+
 ## Các thành viên trong nhóm
 * Nguyễn Thành Trung – 19110304
 * Huỳnh Tấn Việt – 19110316
